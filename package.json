@@ -10,7 +10,9 @@
     "Backend",
     "REST API",
     "SQL",
-    "MARIADB"
+    "MARIADB",
+    "React",
+    "Auth0"
   ],
   "devDependencies": {
     "commitizen": "^4.2.5",
@@ -23,6 +25,10 @@
     }
   },
   "scripts": {
+    "install": "cd ./backend && yarn && cd ../frontend npm i",
+    "frontend:format-check": "cd ./frontend && npm run format:check",
+    "lint:frontend": "cd ./frontend && npm run lint",
+    "start:frontend": "cd ./frontend && npm start",
     "backend:format-check": "cd ./backend && yarn run format-check:prettier",
     "lint:backend": "cd ./backend && yarn run lint",
     "start:backend-dev": "cd ./backend && yarn run start:dev",
