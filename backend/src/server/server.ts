@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import mainRoutes from '../routes/main-routes';
+import userRoutes from '../routes/user-routes';
 import { pageNotFound } from '../middleware/pageNotFound';
 import { errorHandler } from '../middleware/errorHandler';
 
@@ -19,6 +20,7 @@ app.use(
 app.use(morgan('dev'));
 
 app.use('/', mainRoutes);
+app.use('/auth', userRoutes);
 
 app.use('*', pageNotFound);
 app.use(errorHandler);
