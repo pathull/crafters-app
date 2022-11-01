@@ -12,7 +12,8 @@
     "SQL",
     "MARIADB",
     "React",
-    "Auth0"
+    "Auth0",
+    "Yarn"
   ],
   "devDependencies": {
     "commitizen": "^4.2.5",
