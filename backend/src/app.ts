@@ -4,7 +4,7 @@ import { sequelize } from './models/connectionDb';
 
 (async function main() {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     console.log('Connection has been established successfully');
 
     app.listen(app.get('port'), () => {

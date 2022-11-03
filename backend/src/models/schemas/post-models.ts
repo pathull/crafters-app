@@ -1,7 +1,10 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
+
 import { sequelize } from '../connectionDb';
 
-export const PostSchema = sequelize.define('posts', {
+import { IPost } from '../../types/app-types';
+
+const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>('posts', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -27,7 +30,9 @@ export const PostSchema = sequelize.define('posts', {
   postPicUrl: {
     type: DataTypes.STRING,
   },
-  public_id: {
+  public_image_id: {
     type: DataTypes.STRING,
   },
 });
+
+export default PostSchema;

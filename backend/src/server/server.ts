@@ -4,6 +4,7 @@ import morgan from 'morgan';
 
 import mainRoutes from '../routes/main-routes';
 import userRoutes from '../routes/user-routes';
+import postRoutes from '../routes/post-routes';
 import { pageNotFound } from '../middleware/pageNotFound';
 import { errorHandler } from '../middleware/errorHandler';
 
@@ -21,6 +22,7 @@ app.use(morgan('dev'));
 
 app.use('/', mainRoutes);
 app.use('/auth', userRoutes);
+app.use('/posts', postRoutes);
 
 app.use('*', pageNotFound);
 app.use(errorHandler);
