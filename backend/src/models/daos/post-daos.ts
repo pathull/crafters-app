@@ -6,6 +6,20 @@ import { uploadImage } from '../../services/cloudinary';
 import { IPost, IFileImage } from '../../types/app-types';
 import { AppErrors, HttpStatusCode } from '../../helpers/app-error';
 
+export const retrievePostsData = async (email: string) => {
+  if (/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+    const allPosts = await PostModels.findAll({
+      where: {
+        userEmail: email,
+      },
+    });
+
+    return allPosts;
+  }
+
+  throw new AppErrors({ message: 'Needs to be an email', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
+};
+
 export const addNewPost = async (info: IPost, image: IFileImage) => {
   const { title, description, userEmail } = info;
   if (title && userEmail && image) {

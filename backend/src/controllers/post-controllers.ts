@@ -1,6 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { addNewPost } from '../models/daos/post-daos';
+import { addNewPost, retrievePostsData } from '../models/daos/post-daos';
+
+export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    if (req.params.emailUser) {
+      const result = await retrievePostsData(req.params.emailUser);
+
+      return res.status(200).json(result);
+    }
+
+    return res.status(400).json({ message: 'Please provide a user email' });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
 
 export const createNewPost = async (req: Request, res: Response, next: NextFunction) => {
   try {

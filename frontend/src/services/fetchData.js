@@ -1,5 +1,18 @@
 const urlBase = 'http://localhost:8080';
 
+export const retrievePosts = async email => {
+  try {
+    if (!email) return;
+
+    const data = await fetch(`${urlBase}/posts/${email}`);
+    const posts = await data.json();
+
+    return posts;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createNewPost = async post => {
   try {
     if (post) {
