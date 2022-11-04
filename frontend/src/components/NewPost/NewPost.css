@@ -1,0 +1,94 @@
+.formContainer__div {
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer__details {
+  background-color: #FFF;
+  padding: 30px 20px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+}
+
+.formContainer__title {
+  position: relative;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.formTitle__input {
+  background-color: #f2f4f6;
+  padding: 1rem 1rem;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.formTitle__label {
+  position: absolute;
+  top: 5px;
+  left: 17px;
+  color: #89969d;
+  transform: translateY(10px);
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transition: transform .1s, darkblue, .3s;
+  -webkit-transition: transform .1s, darkblue, .3s;
+  -moz-transition: transform .1s, darkblue, .3s;
+  -ms-transition: transform .1s, darkblue, .3s;
+  -o-transition: transform .1s, darkblue, .3s;
+}
+
+.formTitle__input:not(:placeholder-shown) {
+  color: #000;
+}
+
+.formTitle__input:not(:placeholder-shown) + .formTitle__label {
+  transform: translateY(-25px) scale(.9);
+  -webkit-transform: translateY(-25px) scale(.9);
+  -moz-transform: translateY(-25px) scale(.9);
+  -ms-transform: translateY(-25px) scale(.9);
+  -o-transform: translateY(-25px) scale(.9);
+  transform-origin: left top;
+  color: darkblue;
+}
+
+.formContainer__image {
+  margin-bottom: 2rem;
+}
+
+.formContainer__btn {
+  display: flex;
+}
+
+.submitButton__newPost {
+  flex: 1;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  background-color: #463184;
+  color: #fff;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+}
+
+.submitButton__newPost:hover {
+  background-color: #2b1f51;
+  transition: ease-in-out 0.3s;
+  -webkit-transition: ease-in-out 0.3s;
+  -moz-transition: ease-in-out 0.3s;
+  -ms-transition: ease-in-out 0.3s;
+  -o-transition: ease-in-out 0.3s;
+}

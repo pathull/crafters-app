@@ -1,9 +1,11 @@
-.profileSection {
+.profileSection,
+.createNewPost__container {
   width: 100%;
   background-color: #f6f6f6;
 }
 
-.profileContainer {
+.profileContainer,
+.formContainer {
   width: 80%;
   margin: 0 auto;
   padding: 30px 20px;
