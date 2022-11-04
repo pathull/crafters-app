@@ -1,17 +1,28 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { FilePond, registerPlugin } from 'react-filepond';
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 
 import './NewPost.css';
+
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
 import { createNewPost } from '../../services/fetchData';
 
 export const NewPost = () => {
+  const navigate = useNavigate();
   const { user } = useAuth0();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
 
-  const submitHandler = e => {
+  const submitHandler = async e => {
     e.preventDefault();
 
     if (title !== '' && image) {
@@ -19,13 +30,17 @@ export const NewPost = () => {
         userEmail: user.email,
         title,
         description,
-        postPicture: image,
+        postPicture: image[0].file,
       };
 
-      createNewPost(post);
+      const res = await createNewPost(post);
       setTitle('');
       setDescription('');
       setImage(null);
+
+      if (res.id) {
+        navigate('/profile');
+      }
     }
   };
 
@@ -62,7 +77,7 @@ export const NewPost = () => {
                 Description
               </label>
             </div>
-            <div className="formContainer__image">
+            {/* <div className="formContainer__image">
               <label htmlFor="postPicture">Image</label>
               <input
                 type="file"
@@ -70,6 +85,17 @@ export const NewPost = () => {
                 id="postPicture"
                 accept="image/*"
                 onChange={e => setImage(e.target.files[0])}
+              />
+            </div> */}
+            <div className="formContainer__image">
+              <FilePond
+                files={image}
+                allowReorder={true}
+                allowMultiple={false}
+                onupdatefiles={setImage}
+                allowFileTypeValidation={true}
+                acceptedFileTypes={['image/*']}
+                labelIdle="Drag & Drop your files or <span class=filepond--label-action>Browse</span>"
               />
             </div>
             <div className="formContainer__btn">

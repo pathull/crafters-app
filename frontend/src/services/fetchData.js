@@ -26,7 +26,7 @@ export const createNewPost = async post => {
         body: fd,
       });
       const resp = await data.json();
-      console.log(resp);
+      return resp;
     }
   } catch (err) {
     console.error(err);

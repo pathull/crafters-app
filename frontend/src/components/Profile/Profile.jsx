@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { RotatingLines } from 'react-loader-spinner';
 
 import './Profile.css';
 
-import { useAuth0 } from '@auth0/auth0-react';
 import { retrievePosts } from '../../services/fetchData';
-import { RotatingLines } from 'react-loader-spinner';
+import { PostLists } from '../PostLists/PostLists';
 
 export const Profile = () => {
   const { user } = useAuth0();
@@ -16,12 +17,10 @@ export const Profile = () => {
     }
   }, [user]);
 
-  console.log(posts);
-
   return (
     <section className="profileSection">
-      <div className="profileContainer">
-        {user ? (
+      {user ? (
+        <div className="profileContainer">
           <div className="singleFlexProp">
             <img className="profileInfo__image" src={user.picture} alt={user.nickname} />
 
@@ -43,12 +42,15 @@ export const Profile = () => {
               <p className="user__fullName">{user.name}</p>
             </div>
           </div>
-        ) : (
-          <div className="w-full h-screen flex justify-center items-center">
-            <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="200" visible={true} />
+          <div>
+            <PostLists postsList={posts} />
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="w-full h-screen flex justify-center items-center">
+          <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="200" visible={true} />
+        </div>
+      )}
     </section>
   );
 };
