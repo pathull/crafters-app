@@ -17,3 +17,14 @@ export interface IPost {
   postPicUrl?: string;
   public_image_id?: string;
 }
+
+export interface IUser {
+  id?: number;
+  email: string;
+  userPicUrl?: string;
+  public_picture_id?: string;
+  username?: string;
+  name?: string;
+  bio?: string;
+  auction_wins?: number;
+}

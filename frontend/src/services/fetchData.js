@@ -32,3 +32,33 @@ export const createNewPost = async post => {
     console.error(err);
   }
 };
+
+export const retrieveUser = async userEmail => {
+  try {
+    if (!userEmail) return;
+    const data = await fetch(`${urlBase}/user/${userEmail}`);
+    const newUser = await data.json();
+
+    return newUser;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const storeUser = async body => {
+  try {
+    const data = await fetch(`${urlBase}/user`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    const res = await data.json();
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};

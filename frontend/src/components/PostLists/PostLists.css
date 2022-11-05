@@ -1,0 +1,30 @@
+.postLists__container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.button__container {
+  margin-top: 5rem;
+}
+
+.button__createPost {
+  background-color: #002244;
+  color: #fff;
+  padding: .5rem 2rem;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  transition: ease-in-out 0.1s;
+  -webkit-transition: ease-in-out 0.1s;
+  -moz-transition: ease-in-out 0.1s;
+  -ms-transition: ease-in-out 0.1s;
+  -o-transition: ease-in-out 0.1s;
+}
+
+.button__createPost:hover {
+  background-color: #004890;
+}

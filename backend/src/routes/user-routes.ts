@@ -1,14 +1,10 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Router } from 'express';
+
+import { getSingleUserInfo, postNewUser } from '../controllers/user-controllers';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  try {
-    res.status(200).json({ user: 'Send a fucking user' });
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
-});
+router.get('/:userEmail', getSingleUserInfo);
+router.post('/', postNewUser);
 
 export default router;

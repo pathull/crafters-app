@@ -21,7 +21,7 @@ app.use(
 app.use(morgan('dev'));
 
 app.use('/', mainRoutes);
-app.use('/auth', userRoutes);
+app.use('/user', userRoutes);
 app.use('/posts', postRoutes);
 
 app.use('*', pageNotFound);

@@ -6,6 +6,7 @@ import './Profile.css';
 
 import { retrievePosts } from '../../services/fetchData';
 import { PostLists } from '../PostLists/PostLists';
+import { UserInfo } from '../UserInfo/UserInfo';
 
 export const Profile = () => {
   const { user } = useAuth0();
@@ -21,28 +22,9 @@ export const Profile = () => {
     <section className="profileSection">
       {user ? (
         <div className="profileContainer">
-          <div className="singleFlexProp">
-            <img className="profileInfo__image" src={user.picture} alt={user.nickname} />
+          <UserInfo user={user} postNumber={posts.length} />
 
-            <div className="profileInfo__user">
-              <div className="userInfo__container">
-                <h2 className="userInfo__username">{user.nickname}</h2>
-                <button className="editButtonInfo" type="button">
-                  Edit profile
-                </button>
-              </div>
-              <div className="statsInfo">
-                <p className="statistics">
-                  <span className="individualStats">200</span> posts
-                </p>
-                <p className="statistics">
-                  <span className="individualStats">5</span> wins
-                </p>
-              </div>
-              <p className="user__fullName">{user.name}</p>
-            </div>
-          </div>
-          <div>
+          <div className="listContainer__posts">
             <PostLists postsList={posts} />
           </div>
         </div>
