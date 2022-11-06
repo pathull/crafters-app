@@ -20,6 +20,7 @@ export const createNewUser = async (info: IUser) => {
   const { email, bio, username, name } = info;
   if (email && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
     const userFound = await retrieveUserInfo(email);
+    console.log(userFound);
 
     if (!userFound) {
       const user = await UserSchema.create({

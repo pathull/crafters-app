@@ -13,7 +13,7 @@ export const Profile = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (user !== undefined) {
+    if (user) {
       retrievePosts(user.email).then(data => setPosts(data));
     }
   }, [user]);

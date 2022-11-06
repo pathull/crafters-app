@@ -14,6 +14,7 @@ const UserSchema = sequelize.define<Model<IUser, Optional<IUser, 'id'>>>('users'
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       isEmail: {
         msg: 'Enter a valid Email',

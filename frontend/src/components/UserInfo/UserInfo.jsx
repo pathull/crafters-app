@@ -8,7 +8,7 @@ export const UserInfo = ({ user, postNumber }) => {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    if (user) {
+    if (user && !userInfo) {
       retrieveUser(user.email).then(data => {
         if (data) {
           setUserInfo(data);
@@ -20,13 +20,17 @@ export const UserInfo = ({ user, postNumber }) => {
             name: '',
           };
 
-          storeUser(newUser).then(info => setUserInfo(info));
+          storeUser(newUser).then(info => {
+            if (!info.error) {
+              setUserInfo(info);
+            }
+          });
         }
       });
     }
-  }, [user]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   return (
     <div className="singleFlexProp">
@@ -48,7 +52,8 @@ export const UserInfo = ({ user, postNumber }) => {
             <span className="individualStats">{postNumber}</span> posts
           </p>
           <p className="statistics">
-            <span className="individualStats">{userInfo ? userInfo.auction_wins : 0}</span> wins
+            <span className="individualStats">{userInfo && userInfo.auction_wins ? userInfo.auction_wins : 0} </span>{' '}
+            wins
           </p>
         </div>
         <p className="user__fullName">{userInfo && userInfo.name ? userInfo.name : user.name}</p>

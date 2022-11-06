@@ -5,8 +5,6 @@ import './PostLists.css';
 import { SinglePost } from '../SinglePost/SinglePost';
 
 export const PostLists = ({ postsList }) => {
-  console.log(postsList);
-
   return (
     <div className="postLists__container">
       {postsList.length ? (
