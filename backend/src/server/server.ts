@@ -20,7 +20,7 @@ app.use(
 );
 app.use(morgan('dev'));
 
-app.use('/', mainRoutes);
+app.use('/listPosts', mainRoutes);
 app.use('/user', userRoutes);
 app.use('/posts', postRoutes);
 

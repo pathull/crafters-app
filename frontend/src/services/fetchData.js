@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const urlBase = 'http://localhost:8080';
 
 export const retrievePosts = async email => {
@@ -73,12 +75,9 @@ export const updateUserInfo = async (id, info) => {
         formData.append(name, info[name]);
       }
 
-      const data = await fetch(`${urlBase}/user/${id}`, {
-        method: 'PUT',
-        body: formData,
-      });
+      const data = await axios.put(`${urlBase}/user/${id}`, formData);
 
-      const userUpdated = await data.json();
+      const userUpdated = data.data;
       return userUpdated;
     }
   } catch (err) {

@@ -47,18 +47,10 @@ export const createNewUser = async (info: IUser) => {
 export const upgradeInfoUser = async (id: string, userInfo: IUser, picture?: IFileImage) => {
   const { name, username, bio } = userInfo;
   if (!isNaN(Number(id))) {
-    const user = await UserSchema.findOne({
-      where: {
-        id,
-      },
-    });
+    const user = await UserSchema.findOne({ where: { id } });
 
     if (user) {
-      user.set({
-        name,
-        username,
-        bio,
-      });
+      user.set({ name, username, bio });
 
       if (picture) {
         const publicId = user.getDataValue('public_picture_id');
