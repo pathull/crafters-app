@@ -62,3 +62,26 @@ export const storeUser = async body => {
     console.error(err);
   }
 };
+
+export const updateUserInfo = async (id, info) => {
+  try {
+    if (!id) return;
+
+    if (info) {
+      const formData = new FormData();
+      for (const name in info) {
+        formData.append(name, info[name]);
+      }
+
+      const data = await fetch(`${urlBase}/user/${id}`, {
+        method: 'PUT',
+        body: formData,
+      });
+
+      const userUpdated = await data.json();
+      return userUpdated;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
