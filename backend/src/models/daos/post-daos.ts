@@ -40,3 +40,12 @@ export const addNewPost = async (info: IPost, image: IFileImage) => {
 
   throw new AppErrors({ message: 'Please filled up all information', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
 };
+
+export const retrieveOnePost = async (id: string) => {
+  if (!isNaN(Number(id))) {
+    const post = await PostModels.findOne({ where: { id } });
+
+    return post;
+  }
+  throw new AppErrors({ message: 'ID must be a number', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
+};

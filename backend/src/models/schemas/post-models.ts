@@ -4,22 +4,22 @@ import { sequelize } from '../connectionDb';
 
 import { IPost } from '../../types/app-types';
 
-const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>('posts', {
+export const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>('posts', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
   },
-  userEmail: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      isEmail: {
-        msg: 'User must be an Email',
-      },
-    },
-  },
+  // userEmail: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     isEmail: {
+  //       msg: 'User must be an Email',
+  //     },
+  //   },
+  // },
   title: {
     type: DataTypes.STRING,
     allowNull: false,

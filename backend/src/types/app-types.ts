@@ -11,7 +11,7 @@ export interface IFileImage {
 
 export interface IPost {
   id?: number;
-  userEmail: string;
+  userEmail?: string;
   title: string;
   description: string;
   postPicUrl?: string;

@@ -2,6 +2,9 @@ import 'dotenv/config';
 import app from './server/server';
 import { sequelize } from './models/connectionDb';
 
+// import './models/schemas/post-models';
+// import './models/schemas/user-schema';
+
 (async function main() {
   try {
     await sequelize.sync({ force: true });

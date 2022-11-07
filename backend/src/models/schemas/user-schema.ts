@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '../connectionDb';
+import { PostSchema } from './post-models';
 
 import { IUser } from '../../types/app-types';
 
@@ -45,6 +46,17 @@ const UserSchema = sequelize.define<Model<IUser, Optional<IUser, 'id'>>>('users'
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
+});
+
+//! Creating relations for the tasks
+UserSchema.hasMany(PostSchema, {
+  foreignKey: 'userEmail',
+  sourceKey: 'email',
+});
+
+PostSchema.belongsTo(UserSchema, {
+  foreignKey: 'userEmail',
+  targetKey: 'email',
 });
 
 export default UserSchema;
