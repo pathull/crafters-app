@@ -20,7 +20,7 @@ export const retrieveUserInfo = async (email: string) => {
 };
 
 export const createNewUser = async (info: IUser) => {
-  const { email, bio, username, name } = info;
+  const { email, bio, username, name, userPicUrl } = info;
   if (email && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
     const userFound = await retrieveUserInfo(email);
     console.log(userFound);
@@ -31,7 +31,7 @@ export const createNewUser = async (info: IUser) => {
         bio,
         username,
         name,
-        userPicUrl: '',
+        userPicUrl,
         public_picture_id: '',
       });
 

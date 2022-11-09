@@ -1,0 +1,12 @@
+.commentInfo > p {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.commentInfo > p > span {
+  font-weight: bold;
+}
+
+.commentContainer {
+  padding: 1rem 1rem;
+}

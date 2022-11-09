@@ -84,3 +84,29 @@ export const updateUserInfo = async (id, info) => {
     console.error(err);
   }
 };
+
+export const getSinglePostData = async id => {
+  try {
+    if (!id) return;
+
+    const singlePost = await axios.get(`${urlBase}/posts/single-post/${id}`);
+
+    if (singlePost.status === 200) return singlePost.data;
+    else return null;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getAllPosts = async () => {
+  try {
+    const data = await fetch(`${urlBase}/listPosts`);
+
+    const allPosts = await data.json();
+
+    if (allPosts.length) return allPosts;
+    else return null;
+  } catch (err) {
+    console.error(err);
+  }
+};

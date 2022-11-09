@@ -19,6 +19,7 @@ export const UserState = ({ children }) => {
             bio: '',
             username: user.nickname,
             name: '',
+            userPicUrl: user.picture,
           };
 
           storeUser(newUser).then(info => {
