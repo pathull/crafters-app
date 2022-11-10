@@ -6,6 +6,7 @@ import moment from 'moment';
 import './DetailsPost.css';
 
 import { getSinglePostData } from '../../services/fetchData';
+import { getCommentsByPost } from '../../services/fetchComments';
 import { UserContext } from '../../context/UserContext';
 import { RenderComments } from '../RenderComments/RenderComments';
 import { CommentInput } from '../CommentInput/CommentInput';
@@ -14,11 +15,13 @@ export const DetailsPost = () => {
   const { id } = useParams();
   const { userData } = useContext(UserContext);
   const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
   const [post, setPost] = useState(null);
 
   useEffect(() => {
     if (userData) {
       getSinglePostData(id).then(info => setPost(info));
+      getCommentsByPost(id).then(data => setComments(data));
     } else {
       navigate('/profile');
     }
@@ -42,14 +45,29 @@ export const DetailsPost = () => {
                   </div>
                 </div>
 
-                <BsThreeDots className="dotsIcon" />
+                <button>
+                  <BsThreeDots className="dotsIcon" />
+                </button>
               </div>
               <div className="listComments__container">
-                <RenderComments user={userData} comment={post} />
+                {post.description || comments.length !== 0 ? (
+                  <>
+                    <RenderComments user={userData} comment={post} />
+                    {comments.map(comment => (
+                      <RenderComments key={comment.id} user={comment.user} comment={comment} />
+                    ))}
+                  </>
+                ) : (
+                  <div className="noCommentContainer">
+                    <div>
+                      <h4 className="noComments__title">No comments yet</h4>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
-                <CommentInput />
+                <CommentInput idUser={userData.id} idPost={post.id} setComments={setComments} />
               </div>
             </div>
           </div>

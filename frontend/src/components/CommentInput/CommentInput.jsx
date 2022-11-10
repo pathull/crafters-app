@@ -3,7 +3,9 @@ import { FaTelegramPlane } from 'react-icons/fa';
 
 import './CommentInput.css';
 
-export const CommentInput = () => {
+import { createNewComment, getCommentsByPost } from '../../services/fetchComments';
+
+export const CommentInput = ({ idUser, idPost, setComments }) => {
   const [comment, setComment] = useState('');
   const [height, setHeight] = useState(40);
 
@@ -17,12 +19,20 @@ export const CommentInput = () => {
     if (comment === '') setHeight(40);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    console.log(comment);
+    const newComment = { comment: comment.trim(), idUser, idPost };
+    const res = await createNewComment(newComment);
+    if (!res.error) {
+      const allComments = await getCommentsByPost(idPost);
+      setComments(allComments);
+    } else {
+      alert(res.message);
+    }
 
     setComment('');
+    setHeight(40);
   };
 
   return (
@@ -36,8 +46,9 @@ export const CommentInput = () => {
           className="w-full focus:ring-0 addComment__input"
           type="text"
           placeholder="Add a comment..."
+          required
         ></textarea>
-        <button className="addComment__btn">
+        <button className="addComment__btn" disabled={comment | (comment === '')}>
           <FaTelegramPlane />
         </button>
       </form>

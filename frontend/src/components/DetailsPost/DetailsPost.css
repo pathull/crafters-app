@@ -98,4 +98,18 @@
 
 .listComments__container {
   flex: 1;
+  overflow-y: auto;
+}
+
+.noCommentContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noComments__title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #002244;
 }

@@ -1,3 +1,10 @@
+.commentArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1rem;
+}
+
 .commentInfo > p {
   font-weight: 300;
   font-size: 14px;
@@ -9,4 +16,8 @@
 
 .commentContainer {
   padding: 1rem 1rem;
+}
+
+.dotsForComments {
+  color: gray;
 }
