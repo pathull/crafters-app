@@ -1,11 +1,23 @@
-import { BsThreeDots } from 'react-icons/bs';
+import { MdOutlineClear } from 'react-icons/md';
 import moment from 'moment';
+
 import './RenderComments.css';
 
-export const RenderComments = ({ user, comment }) => {
+import { deleteComment, getCommentsByPost } from '../../services/fetchComments';
+
+export const RenderComments = ({ user, comment, setComments }) => {
   if (comment) {
     if (comment.description === '') return null;
   }
+
+  const deleteSingleComment = async () => {
+    const res = await deleteComment(comment.id);
+
+    if (!res.error) {
+      const allComments = await getCommentsByPost(comment.idPost);
+      setComments(allComments);
+    }
+  };
 
   return (
     <div className="commentArea">
@@ -20,8 +32,8 @@ export const RenderComments = ({ user, comment }) => {
       </div>
 
       {comment.comment ? (
-        <button>
-          <BsThreeDots className="dotsForComments" />
+        <button onClick={deleteSingleComment}>
+          <MdOutlineClear className="dotsForComments" />
         </button>
       ) : null}
     </div>

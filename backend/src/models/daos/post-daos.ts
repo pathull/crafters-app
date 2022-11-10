@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 
 import PostModels from '../schemas/post-models';
 
-import { uploadImage } from '../../services/cloudinary';
+import { uploadImage, deleteImage } from '../../services/cloudinary';
 import { IPost, IFileImage } from '../../types/app-types';
 import { AppErrors, HttpStatusCode } from '../../helpers/app-error';
 
@@ -12,6 +12,7 @@ export const retrievePostsData = async (email: string) => {
       where: {
         userEmail: email,
       },
+      order: [['createdAt', 'DESC']],
     });
 
     return allPosts;
@@ -52,9 +53,16 @@ export const retrieveOnePost = async (id: string) => {
 
 export const deleteOnePost = async (idPost: string) => {
   if (!isNaN(Number(idPost))) {
-    const deletedPost = await PostModels.destroy({ where: { id: idPost } });
+    const postToDelete = await PostModels.findByPk(idPost);
 
-    return deletedPost;
+    if (postToDelete) {
+      const publicId = postToDelete.getDataValue('public_image_id');
+      if (publicId) {
+        await deleteImage(publicId);
+      }
+      const deletedPost = await PostModels.destroy({ where: { id: idPost } });
+      return deletedPost;
+    }
   }
 
   throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });

@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BsThreeDots } from 'react-icons/bs';
+import { FiDelete } from 'react-icons/fi';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 import './DetailsPost.css';
 
-import { getSinglePostData } from '../../services/fetchData';
+import { getSinglePostData, deleteSinglePost } from '../../services/fetchData';
 import { getCommentsByPost } from '../../services/fetchComments';
 import { UserContext } from '../../context/UserContext';
 import { RenderComments } from '../RenderComments/RenderComments';
@@ -27,6 +28,24 @@ export const DetailsPost = () => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const deletePost = () => {
+    Swal.fire({
+      title: 'Are your sure to delete this Post!',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      confirmButtonColor: '#002244',
+      cancelButtonColor: '#d63031',
+    }).then(async result => {
+      if (result.isConfirmed) {
+        const res = await deleteSinglePost(post.id);
+        if (res.message === 'Deleted') {
+          navigate('/profile');
+        }
+      }
+    });
+  };
+
   return (
     <section className="profileSection">
       {post ? (
@@ -45,16 +64,21 @@ export const DetailsPost = () => {
                   </div>
                 </div>
 
-                <button>
-                  <BsThreeDots className="dotsIcon" />
+                <button onClick={deletePost}>
+                  <FiDelete className="dotsIcon" />
                 </button>
               </div>
               <div className="listComments__container">
                 {post.description || comments.length !== 0 ? (
                   <>
-                    <RenderComments user={userData} comment={post} />
+                    {post.description ? <RenderComments user={userData} comment={post} /> : null}
                     {comments.map(comment => (
-                      <RenderComments key={comment.id} user={comment.user} comment={comment} />
+                      <RenderComments
+                        key={comment.id}
+                        user={comment.user}
+                        setComments={setComments}
+                        comment={comment}
+                      />
                     ))}
                   </>
                 ) : (

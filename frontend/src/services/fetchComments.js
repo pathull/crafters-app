@@ -35,3 +35,18 @@ export const getCommentsByPost = async id => {
     console.error(err);
   }
 };
+
+export const deleteComment = async idComment => {
+  try {
+    if (!isNaN(Number(idComment))) {
+      const data = await fetch(`${urlBase}/comments/delete/${idComment}`, {
+        method: 'DELETE',
+        mode: 'cors',
+      });
+
+      return await data.json();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

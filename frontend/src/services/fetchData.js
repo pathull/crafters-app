@@ -110,3 +110,18 @@ export const getAllPosts = async () => {
     console.error(err);
   }
 };
+
+export const deleteSinglePost = async idPost => {
+  try {
+    if (!isNaN(Number(idPost))) {
+      const data = await fetch(`${urlBase}/posts/delete-post/${idPost}`, {
+        method: 'DELETE',
+        mode: 'cors',
+      });
+
+      return await data.json();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

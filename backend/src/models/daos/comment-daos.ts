@@ -8,11 +8,12 @@ export const getCommentsByPost = async (idPost: string) => {
   if (!isNaN(Number(idPost))) {
     const allComments = await CommentModels.findAll({
       where: { idPost },
-      attributes: { exclude: ['idPost', 'idUser'] },
+      attributes: { exclude: ['idUser'] },
       include: {
         model: UserModels,
         attributes: ['username', 'userPicUrl'],
       },
+      order: [['createdAt', 'DESC']],
     });
 
     return allComments;
