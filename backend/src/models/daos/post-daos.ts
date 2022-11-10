@@ -49,3 +49,13 @@ export const retrieveOnePost = async (id: string) => {
   }
   throw new AppErrors({ message: 'ID must be a number', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
 };
+
+export const deleteOnePost = async (idPost: string) => {
+  if (!isNaN(Number(idPost))) {
+    const deletedPost = await PostModels.destroy({ where: { id: idPost } });
+
+    return deletedPost;
+  }
+
+  throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
+};

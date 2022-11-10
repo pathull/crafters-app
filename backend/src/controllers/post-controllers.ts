@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { addNewPost, retrievePostsData, retrieveOnePost } from '../models/daos/post-daos';
+import { addNewPost, retrievePostsData, retrieveOnePost, deleteOnePost } from '../models/daos/post-daos';
 
 export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -37,6 +37,18 @@ export const getSinglePost = async (req: Request, res: Response, next: NextFunct
 
     if (post) return res.status(200).json(post);
     else return res.status(400).json({ message: 'Post does not exist' });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+export const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await deleteOnePost(req.params.idPost);
+
+    if (result) res.status(200).json({ message: 'Deleted' });
+    else res.status(405).json({ message: 'Post not deleted', error: true });
   } catch (err) {
     console.error(err);
     next(err);
