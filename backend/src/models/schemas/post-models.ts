@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '../connectionDb';
+import { CommentSchema } from './comment-models';
 
 import { IPost } from '../../types/app-types';
 
@@ -33,6 +34,16 @@ export const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>(
   public_image_id: {
     type: DataTypes.STRING,
   },
+});
+
+PostSchema.hasMany(CommentSchema, {
+  foreignKey: 'idPost',
+  sourceKey: 'id',
+});
+
+CommentSchema.belongsTo(PostSchema, {
+  foreignKey: 'idPost',
+  targetKey: 'id',
 });
 
 export default PostSchema;

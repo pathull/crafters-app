@@ -10,6 +10,7 @@ export const errorHandler = (err: AppErrors, _req: Request, res: Response, next:
       status: err.status || 500,
       trace: err.stack || err.trace || 'Stack not available',
       code: err.code || -1,
+      error: err.error || true,
     },
   });
 

@@ -28,3 +28,10 @@ export interface IUser {
   bio?: string;
   auction_wins?: number;
 }
+
+export interface IComment {
+  id?: number;
+  comment: string;
+  idUser?: number;
+  idPost?: number;
+}

@@ -2,6 +2,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '../connectionDb';
 import { PostSchema } from './post-models';
+import { CommentSchema } from './comment-models';
 
 import { IUser } from '../../types/app-types';
 
@@ -54,9 +55,19 @@ UserSchema.hasMany(PostSchema, {
   sourceKey: 'email',
 });
 
+UserSchema.hasMany(CommentSchema, {
+  foreignKey: 'idUser',
+  sourceKey: 'id',
+});
+
 PostSchema.belongsTo(UserSchema, {
   foreignKey: 'userEmail',
   targetKey: 'email',
+});
+
+CommentSchema.belongsTo(UserSchema, {
+  foreignKey: 'idUser',
+  targetKey: 'id',
 });
 
 export default UserSchema;
