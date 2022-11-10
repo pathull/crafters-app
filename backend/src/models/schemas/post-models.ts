@@ -39,6 +39,7 @@ export const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>(
 PostSchema.hasMany(CommentSchema, {
   foreignKey: 'idPost',
   sourceKey: 'id',
+  onDelete: 'CASCADE',
 });
 
 CommentSchema.belongsTo(PostSchema, {

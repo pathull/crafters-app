@@ -32,3 +32,13 @@ export const postNewComment = async (info: IComment) => {
 
   throw new AppErrors({ message: 'Invalid data from body', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
 };
+
+export const deleteOneComment = async (idComment: string) => {
+  if (!isNaN(Number(idComment))) {
+    const commentDeleted = await CommentModels.destroy({ where: { id: idComment } });
+
+    return commentDeleted;
+  }
+
+  throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
+};
