@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 
 import PostModels from '../schemas/post-models';
+import UserModel from '../schemas/user-schema';
 
 import { uploadImage, deleteImage } from '../../services/cloudinary';
 import { IPost, IFileImage } from '../../types/app-types';
@@ -43,8 +44,16 @@ export const addNewPost = async (info: IPost, image: IFileImage) => {
 };
 
 export const retrieveOnePost = async (id: string) => {
+  //TODO populate user
   if (!isNaN(Number(id))) {
-    const post = await PostModels.findOne({ where: { id } });
+    const post = await PostModels.findOne({
+      where: { id },
+      attributes: { exclude: ['userEmail', 'public_image_id'] },
+      include: {
+        model: UserModel,
+        attributes: ['userPicUrl', 'username', 'id', 'email'],
+      },
+    });
 
     return post;
   }

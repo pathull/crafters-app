@@ -57,9 +57,9 @@ export const DetailsPost = () => {
             <div className="detailsPost__infoContainer">
               <div className="detailsInfo">
                 <div className="detailInfo__user">
-                  <img src={userData.userPicUrl} alt={userData.username} />
+                  <img src={post.user.userPicUrl} alt={post.user.username} />
                   <div>
-                    <h4 className="userInfo__username">{userData.username}</h4>
+                    <h4 className="userInfo__username">{post.user.username}</h4>
                     <span className="timeFormat__comments">{moment(post.updatedAt).fromNow()}</span>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ export const DetailsPost = () => {
               <div className="listComments__container">
                 {post.description || comments.length !== 0 ? (
                   <>
-                    {post.description ? <RenderComments user={userData} comment={post} /> : null}
+                    {post.description ? <RenderComments user={post.user} comment={post} /> : null}
                     {comments.map(comment => (
                       <RenderComments
                         key={comment.id}
