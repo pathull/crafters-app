@@ -104,8 +104,7 @@ export const getAllPosts = async () => {
 
     const allPosts = await data.json();
 
-    if (allPosts.length) return allPosts;
-    else return null;
+    return allPosts;
   } catch (err) {
     console.error(err);
   }

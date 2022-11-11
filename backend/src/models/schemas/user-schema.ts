@@ -3,6 +3,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from '../connectionDb';
 import { PostSchema } from './post-models';
 import { CommentSchema } from './comment-models';
+import { WishListSchema } from './wishList-models';
 
 import { IUser } from '../../types/app-types';
 
@@ -49,7 +50,7 @@ const UserSchema = sequelize.define<Model<IUser, Optional<IUser, 'id'>>>('users'
   },
 });
 
-//! Creating relations for the tasks
+//! Creating relations for the app
 UserSchema.hasMany(PostSchema, {
   foreignKey: 'userEmail',
   sourceKey: 'email',
@@ -66,6 +67,16 @@ PostSchema.belongsTo(UserSchema, {
 });
 
 CommentSchema.belongsTo(UserSchema, {
+  foreignKey: 'idUser',
+  targetKey: 'id',
+});
+
+UserSchema.hasMany(WishListSchema, {
+  foreignKey: 'idUser',
+  sourceKey: 'id',
+});
+
+WishListSchema.belongsTo(UserSchema, {
   foreignKey: 'idUser',
   targetKey: 'id',
 });

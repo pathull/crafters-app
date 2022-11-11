@@ -2,6 +2,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '../connectionDb';
 import { CommentSchema } from './comment-models';
+import { WishListSchema } from './wishList-models';
 
 import { IPost } from '../../types/app-types';
 
@@ -34,6 +35,14 @@ export const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>(
   public_image_id: {
     type: DataTypes.STRING,
   },
+  price: {
+    type: DataTypes.BIGINT,
+    defaultValue: 0,
+  },
+  sold: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 PostSchema.hasMany(CommentSchema, {
@@ -43,6 +52,17 @@ PostSchema.hasMany(CommentSchema, {
 });
 
 CommentSchema.belongsTo(PostSchema, {
+  foreignKey: 'idPost',
+  targetKey: 'id',
+});
+
+PostSchema.hasMany(WishListSchema, {
+  foreignKey: 'idPost',
+  sourceKey: 'id',
+  onDelete: 'CASCADE',
+});
+
+WishListSchema.belongsTo(PostSchema, {
   foreignKey: 'idPost',
   targetKey: 'id',
 });

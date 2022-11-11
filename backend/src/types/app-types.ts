@@ -16,6 +16,8 @@ export interface IPost {
   description: string;
   postPicUrl?: string;
   public_image_id?: string;
+  price?: number;
+  sold?: boolean;
 }
 
 export interface IUser {
@@ -32,6 +34,13 @@ export interface IUser {
 export interface IComment {
   id?: number;
   comment: string;
+  idUser?: number;
+  idPost?: number;
+}
+
+export interface IWishList {
+  id?: number;
+  wishlist?: boolean;
   idUser?: number;
   idPost?: number;
 }

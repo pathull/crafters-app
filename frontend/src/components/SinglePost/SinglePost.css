@@ -3,3 +3,19 @@
   height: 250px;
   object-fit: cover;
 }
+
+.wishListStar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.wishListStar:hover {
+  color: #ffc107;
+}
+
+/* .isActive {
+  color: #ffc107;
+} */

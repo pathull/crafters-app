@@ -44,7 +44,6 @@ export const addNewPost = async (info: IPost, image: IFileImage) => {
 };
 
 export const retrieveOnePost = async (id: string) => {
-  //TODO populate user
   if (!isNaN(Number(id))) {
     const post = await PostModels.findOne({
       where: { id },
