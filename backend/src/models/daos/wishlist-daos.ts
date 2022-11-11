@@ -48,7 +48,14 @@ export const listWishByUser = async (idUser: string) => {
         model: PostSchema,
       },
     });
-    return allWishes;
+
+    if (allWishes.length) {
+      const listOfPosts = allWishes.map(wish => wish.toJSON().post);
+
+      return listOfPosts;
+    } else {
+      return [];
+    }
   }
 
   throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });

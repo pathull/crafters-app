@@ -43,4 +43,5 @@ export interface IWishList {
   wishlist?: boolean;
   idUser?: number;
   idPost?: number;
+  post?: IPost;
 }

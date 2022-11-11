@@ -28,3 +28,7 @@
 .button__createPost:hover {
   background-color: #004890;
 }
+
+.noPostsClass {
+  color: #bebebe;
+}

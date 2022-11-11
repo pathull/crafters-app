@@ -1,7 +1,7 @@
 import { BsArrowLeftShort, BsSearch } from 'react-icons/bs';
 import { FiLogOut, FiPlusSquare } from 'react-icons/fi';
 import { GiSewingMachine } from 'react-icons/gi';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaStar } from 'react-icons/fa';
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ export const Sidebar = () => {
               !toggleButton ? 'rotate-[360deg]' : ''
             }`}
           />
-          <h1 className={`text-white origin-left font-medium text-2xl ${!toggleButton ? 'hidden' : ''}`}>KnitIt!</h1>
+          <h1 className={`text-white origin-left font-medium text-2xl ${!toggleButton ? 'hidden' : ''}`}>Crafters</h1>
         </Link>
       </div>
 
@@ -58,6 +58,16 @@ export const Sidebar = () => {
           >
             <FiPlusSquare className="text-2xl" />
             <span className={`font-medium duration-200 flex-1 ${!toggleButton ? 'hidden' : ''}`}>Create</span>
+          </Link>
+        </li>
+
+        <li className="text-white duration-300 mt-2 rounded-md hover:bg-light-white">
+          <Link
+            to="/wishlist"
+            className={`p-2 cursor-pointer text-lg flex items-center ${toggleButton ? 'gap-x-4' : ''}`}
+          >
+            <FaStar className="text-2xl" />
+            <span className={`font-medium duration-200 flex-1 ${!toggleButton ? 'hidden' : ''}`}>Wish list</span>
           </Link>
         </li>
 

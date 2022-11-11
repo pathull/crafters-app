@@ -52,12 +52,12 @@ export const DetailsPost = () => {
         <div className="detailsPost">
           <div className="detailsPost__container">
             <div className="singlePostContainer__image">
-              <img src={post.postPicUrl} alt={post.title} />
+              <img loading="lazy" src={post.postPicUrl} alt={post.title} />
             </div>
             <div className="detailsPost__infoContainer">
               <div className="detailsInfo">
                 <div className="detailInfo__user">
-                  <img src={post.user.userPicUrl} alt={post.user.username} />
+                  <img loading="lazy" src={post.user.userPicUrl} alt={post.user.username} />
                   <div>
                     <h4 className="userInfo__username">{post.user.username}</h4>
                     <span className="timeFormat__comments">{moment(post.updatedAt).fromNow()}</span>

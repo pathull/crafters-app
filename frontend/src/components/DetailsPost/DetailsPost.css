@@ -50,9 +50,9 @@
   -o-border-radius: 0px 7px 7px 0px;
 }
 
-.singlePostContainer__image > img {
+/* .singlePostContainer__image > img {
   aspect-ratio: contain;
-}
+} */
 
 .detailsInfo {
   display: flex;

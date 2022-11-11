@@ -17,7 +17,7 @@ export const deleteFromWishList = async (req: Request, res: Response, next: Next
   try {
     const result = await deleteSingleWish(req.params.idWishlist);
     if (result) return res.status(200).json({ message: 'Deleted' });
-    res.status(500).json({ message: 'Wish does not exist', error: true });
+    res.status(400).json({ message: 'Wish does not exist', error: true });
   } catch (err) {
     console.error(err);
     next(err);
@@ -39,7 +39,7 @@ export const getOneWish = async (req: Request, res: Response, next: NextFunction
     const result = await getSingleWishList(req.params.idPost, req.params.idUser);
 
     if (result) return res.status(200).json(result);
-    res.status(500).json({ message: 'Wish does not exist', error: true });
+    res.status(200).json({ message: 'Wish does not exist', error: true });
   } catch (err) {
     console.error(err);
     next(err);

@@ -37,11 +37,13 @@ export const UserInfo = ({ user, postNumber }) => {
 
   return (
     <div className="singleFlexProp">
-      <img
-        className="profileInfo__image"
-        src={userData && userData.userPicUrl ? userData.userPicUrl : user.picture}
-        alt={userData && userData.username ? userData.username : user.nickname}
-      />
+      <div className="profileInfo__image">
+        <img
+          loading="lazy"
+          src={userData && userData.userPicUrl ? userData.userPicUrl : user.picture}
+          alt={userData && userData.username ? userData.username : user.nickname}
+        />
+      </div>
 
       <div className="profileInfo__user">
         <div className="userInfo__container">

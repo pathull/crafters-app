@@ -17,6 +17,7 @@ export const Login = () => {
   return (
     <div className="relative w-full h-screen bg-zinc-900/90">
       <img
+        loading="lazy"
         className="absolute w-full h-full object-cover mix-blend-overlay"
         src="https://res.cloudinary.com/dukuzakaw/image/upload/v1667389809/knittingApp/loginPics/login-background_zkjewa.webp"
         alt="Login Background"
