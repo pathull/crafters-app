@@ -64,18 +64,21 @@ export const DetailsPost = () => {
                   </div>
                 </div>
 
-                <button onClick={deletePost}>
-                  <FiDelete className="dotsIcon" />
-                </button>
+                {userData.email === post.user.email ? (
+                  <button onClick={deletePost}>
+                    <FiDelete className="dotsIcon" />
+                  </button>
+                ) : null}
               </div>
               <div className="listComments__container">
                 {post.description || comments.length !== 0 ? (
                   <>
-                    {post.description ? <RenderComments user={post.user} comment={post} /> : null}
+                    {post.description ? <RenderComments user={post.user} post={post} comment={post} /> : null}
                     {comments.map(comment => (
                       <RenderComments
                         key={comment.id}
                         user={comment.user}
+                        post={post}
                         setComments={setComments}
                         comment={comment}
                       />

@@ -11,7 +11,7 @@ export const getCommentsByPost = async (idPost: string) => {
       attributes: { exclude: ['idUser'] },
       include: {
         model: UserModels,
-        attributes: ['username', 'userPicUrl'],
+        attributes: ['username', 'userPicUrl', 'email'],
       },
       order: [['createdAt', 'DESC']],
     });

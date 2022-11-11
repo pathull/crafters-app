@@ -1,11 +1,15 @@
+import { useContext } from 'react';
 import { MdOutlineClear } from 'react-icons/md';
 import moment from 'moment';
 
 import './RenderComments.css';
 
+import { UserContext } from '../../context/UserContext';
 import { deleteComment, getCommentsByPost } from '../../services/fetchComments';
 
-export const RenderComments = ({ user, comment, setComments }) => {
+export const RenderComments = ({ user, comment, setComments, post }) => {
+  const { userData } = useContext(UserContext);
+
   if (comment) {
     if (comment.description === '') return null;
   }
@@ -32,9 +36,15 @@ export const RenderComments = ({ user, comment, setComments }) => {
       </div>
 
       {comment.comment ? (
-        <button onClick={deleteSingleComment}>
-          <MdOutlineClear className="dotsForComments" />
-        </button>
+        post.user.email === userData.email ? (
+          <button onClick={deleteSingleComment}>
+            <MdOutlineClear className="dotsForComments" />
+          </button>
+        ) : comment.user.email === userData.email ? (
+          <button onClick={deleteSingleComment}>
+            <MdOutlineClear className="dotsForComments" />
+          </button>
+        ) : null
       ) : null}
     </div>
   );
