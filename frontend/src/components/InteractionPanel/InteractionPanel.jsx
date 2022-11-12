@@ -29,7 +29,15 @@ export const InteractionPanel = ({ post }) => {
     <div className="sectionPanel__container">
       <div className="sectionPanel__elements">
         <button onClick={handleCheckout} className="panelPurchase__btn">
-          Buy for <span className="font-bold">$ {post.price / 100}</span>
+          Buy for{' '}
+          <span className="font-bold">
+            {(post.price / 100).toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
         </button>
       </div>
     </div>
