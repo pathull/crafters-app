@@ -45,3 +45,16 @@ export interface IWishList {
   idPost?: number;
   post?: IPost;
 }
+
+export interface IProductItem {
+  id: number;
+  name: string;
+  description?: string;
+  price: number;
+  image: string;
+}
+
+export interface IItem {
+  item: IProductItem;
+  userId: number;
+}

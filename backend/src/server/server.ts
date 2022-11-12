@@ -7,6 +7,7 @@ import userRoutes from '../routes/user-routes';
 import postRoutes from '../routes/post-routes';
 import commentRoutes from '../routes/comment-routes';
 import wishListRoutes from '../routes/wishlist-routes';
+import paymentRoutes from '../routes/payment-routes';
 import { pageNotFound } from '../middleware/pageNotFound';
 import { errorHandler } from '../middleware/errorHandler';
 
@@ -27,6 +28,7 @@ app.use('/user', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
 app.use('/wishlist', wishListRoutes);
+app.use('/purchase', paymentRoutes);
 
 app.use('*', pageNotFound);
 app.use(errorHandler);

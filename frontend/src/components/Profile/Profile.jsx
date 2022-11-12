@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useSearchParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 
 import './Profile.css';
@@ -10,7 +11,14 @@ import { UserInfo } from '../UserInfo/UserInfo';
 
 export const Profile = () => {
   const { user } = useAuth0();
+  const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
+
+  if (searchParams.get('success') === 'true') {
+    console.log('Thank for your business');
+  } else if (searchParams.get('canceled') === 'true') {
+    console.log('Something went wrong');
+  }
 
   useEffect(() => {
     if (user) {
