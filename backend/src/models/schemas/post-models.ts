@@ -38,6 +38,11 @@ export const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>(
   price: {
     type: DataTypes.BIGINT,
     defaultValue: 0,
+    validate: {
+      isInt: {
+        msg: 'Must be an integer',
+      },
+    },
   },
   sold: {
     type: DataTypes.BOOLEAN,

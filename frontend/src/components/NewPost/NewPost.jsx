@@ -19,7 +19,14 @@ export const NewPost = () => {
   const { user } = useAuth0();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
+  const [price, setPrice] = useState(0);
+
+  const handleInputNumberChange = e => {
+    if (e.target.value >= 0) {
+      if (/^\d*\.?\d{0,2}$/.test(e.target.value)) setPrice(e.target.value);
+    }
+  };
 
   const submitHandler = async e => {
     e.preventDefault();
@@ -28,6 +35,7 @@ export const NewPost = () => {
       const post = {
         userEmail: user.email,
         title,
+        price,
         description,
         postPicture: image[0].file,
       };
@@ -51,6 +59,7 @@ export const NewPost = () => {
             <div className="formContainer__title">
               <input
                 className="formTitle__input focus:ring-0"
+                required
                 type="text"
                 name="title"
                 id="titlePost"
@@ -76,6 +85,23 @@ export const NewPost = () => {
                 Description
               </label>
             </div>
+            <div className="formContainer__title">
+              <input
+                className="formTitle__input focus:ring-0"
+                type="number"
+                min="0"
+                step="0.01"
+                id="priceInput"
+                name="price"
+                onChange={handleInputNumberChange}
+                value={price}
+                placeholder=" "
+                pattern="^\d*\.?\d{0,2}$"
+              />
+              <label className="formTitle__label" htmlFor="priceInput">
+                Price
+              </label>
+            </div>
             {/* <div className="formContainer__image">
               <label htmlFor="postPicture">Image</label>
               <input
@@ -98,7 +124,7 @@ export const NewPost = () => {
               />
             </div>
             <div className="formContainer__btn">
-              <button className="submitButton__newPost" type="submit">
+              <button className="submitButton__newPost" type="submit" disabled={!title || !image.length}>
                 Create New Post
               </button>
             </div>

@@ -11,6 +11,7 @@ import { getCommentsByPost } from '../../services/fetchComments';
 import { UserContext } from '../../context/UserContext';
 import { RenderComments } from '../RenderComments/RenderComments';
 import { CommentInput } from '../CommentInput/CommentInput';
+import { InteractionPanel } from '../InteractionPanel/InteractionPanel';
 
 export const DetailsPost = () => {
   const { id } = useParams();
@@ -92,6 +93,8 @@ export const DetailsPost = () => {
                   </div>
                 )}
               </div>
+
+              <InteractionPanel post={post} />
 
               <div>
                 <CommentInput idUser={userData.id} idPost={post.id} setComments={setComments} />

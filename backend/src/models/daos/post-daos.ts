@@ -23,14 +23,20 @@ export const retrievePostsData = async (email: string) => {
 };
 
 export const addNewPost = async (info: IPost, image: IFileImage) => {
-  const { title, description, userEmail } = info;
+  const { title, description, userEmail, price } = info;
   if (title && userEmail && image) {
     const result = await uploadImage(image.path, 'posts');
+
+    let money = 0;
+    if (price && /^\d*\.?\d{0,2}$/.test(String(price))) {
+      money = price;
+    }
 
     const newPost = await PostModels.create({
       title,
       description,
       userEmail,
+      price: Number(money) * 100,
       postPicUrl: result.secure_url,
       public_image_id: result.public_id,
     });

@@ -1,0 +1,76 @@
+.sectionPanel__container {
+  padding: 0.8rem 0.5rem;
+  border-top: 1px solid #ced4da;
+  padding-top: 1rem;
+}
+
+.sectionPanel__elements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panelPurchase__btn {
+  position: relative;
+  background-color: #ced4da;
+  padding: 0.45rem 1.25rem;
+  font-size: 0.8rem;
+  border-radius: 2rem;
+  text-transform: uppercase;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.panelPurchase__btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ced4da;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  z-index: -2;
+}
+
+.panelPurchase__btn::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #002244;
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  z-index: -1;
+}
+
+.panelPurchase__btn:hover {
+  color: #fff;
+}
+
+.panelPurchase__btn:hover::before {
+  width: 100%;
+}
