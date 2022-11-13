@@ -66,3 +66,10 @@ export interface IOrder {
   idPost?: number;
   idUser?: number;
 }
+
+export interface ILike {
+  id?: number;
+  like: boolean;
+  idUser?: number;
+  idPost?: number;
+}

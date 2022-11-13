@@ -4,6 +4,7 @@ import { sequelize } from '../connectionDb';
 import { CommentSchema } from './comment-models';
 import { WishListSchema } from './wishList-models';
 import { OrderSchema } from './order-models';
+import { LikeSchema } from './like-models';
 
 import { IPost } from '../../types/app-types';
 
@@ -80,6 +81,17 @@ PostSchema.hasMany(OrderSchema, {
 });
 
 OrderSchema.belongsTo(PostSchema, {
+  foreignKey: 'idPost',
+  targetKey: 'id',
+});
+
+PostSchema.hasMany(LikeSchema, {
+  foreignKey: 'idPost',
+  sourceKey: 'id',
+  onDelete: 'CASCADE',
+});
+
+LikeSchema.belongsTo(PostSchema, {
   foreignKey: 'idPost',
   targetKey: 'id',
 });

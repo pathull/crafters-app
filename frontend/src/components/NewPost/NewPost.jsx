@@ -44,6 +44,7 @@ export const NewPost = () => {
       setTitle('');
       setDescription('');
       setImage(null);
+      setPrice(0);
 
       if (res.id) {
         navigate('/profile');

@@ -1,12 +1,23 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 
 import './InteractionPanel.css';
 
 import { UserContext } from '../../context/UserContext';
 import { paymentApi } from '../../services/fetchPayment';
+import { getSingleLike, addLikeToPost, deleteLike } from '../../services/fetchLike';
 
 export const InteractionPanel = ({ post }) => {
   const { userData } = useContext(UserContext);
+  const [likeStatus, setLikeStatus] = useState({ like: false });
+
+  useEffect(() => {
+    getSingleLike(userData.id, post.id).then(res => {
+      if (!res.error) {
+        setLikeStatus(res);
+      }
+    });
+  }, [userData, post]);
 
   const handleCheckout = async () => {
     const item = {
@@ -25,9 +36,31 @@ export const InteractionPanel = ({ post }) => {
     }
   };
 
+  const likePost = async () => {
+    if (likeStatus.like === false) {
+      if (!isNaN(post.id) && !isNaN(userData.id)) {
+        const newLike = await addLikeToPost({ idPost: post.id, idUser: userData.id });
+
+        setLikeStatus(newLike);
+      }
+    }
+  };
+
+  const removeLike = async () => {
+    if (likeStatus.like === true && likeStatus.id && !isNaN(likeStatus.id)) {
+      const likeRemoved = await deleteLike(likeStatus.id);
+
+      if (likeRemoved.message === 'Deleted') setLikeStatus({ like: false });
+    }
+  };
+
   return (
     <div className="sectionPanel__container">
       <div className="sectionPanel__elements">
+        <button className="likeIcon" onClick={likeStatus.like ? removeLike : likePost}>
+          {likeStatus.like ? <AiFillLike /> : <AiOutlineLike />}
+        </button>
+
         <button onClick={handleCheckout} className="panelPurchase__btn">
           Buy for{' '}
           <span className="font-bold">

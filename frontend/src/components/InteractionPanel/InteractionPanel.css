@@ -1,16 +1,18 @@
 .sectionPanel__container {
-  padding: 0.8rem 0.5rem;
+  padding: 0.8rem 2rem;
   border-top: 1px solid #ced4da;
   padding-top: 1rem;
 }
 
 .sectionPanel__elements {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  justify-content: space-between;
+  justify-items: center;
 }
 
 .panelPurchase__btn {
+  grid-column: 2/3;
   position: relative;
   background-color: #ced4da;
   padding: 0.45rem 1.25rem;
@@ -73,4 +75,9 @@
 
 .panelPurchase__btn:hover::before {
   width: 100%;
+}
+
+.likeIcon {
+  font-size: 1.5rem;
+  color: #002244;
 }

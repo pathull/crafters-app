@@ -9,6 +9,7 @@ import commentRoutes from '../routes/comment-routes';
 import wishListRoutes from '../routes/wishlist-routes';
 import paymentRoutes from '../routes/payment-routes';
 import orderRoutes from '../routes/order-routes';
+import likeRoutes from '../routes/like-routes';
 import { pageNotFound } from '../middleware/pageNotFound';
 import { errorHandler } from '../middleware/errorHandler';
 
@@ -31,6 +32,7 @@ app.use('/comments', commentRoutes);
 app.use('/wishlist', wishListRoutes);
 app.use('/purchase', paymentRoutes);
 app.use('/orders', orderRoutes);
+app.use('/likes', likeRoutes);
 
 app.use('*', pageNotFound);
 app.use(errorHandler);
