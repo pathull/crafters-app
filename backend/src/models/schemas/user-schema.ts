@@ -4,6 +4,7 @@ import { sequelize } from '../connectionDb';
 import { PostSchema } from './post-models';
 import { CommentSchema } from './comment-models';
 import { WishListSchema } from './wishList-models';
+import { OrderSchema } from './order-models';
 
 import { IUser } from '../../types/app-types';
 
@@ -77,6 +78,16 @@ UserSchema.hasMany(WishListSchema, {
 });
 
 WishListSchema.belongsTo(UserSchema, {
+  foreignKey: 'idUser',
+  targetKey: 'id',
+});
+
+UserSchema.hasMany(OrderSchema, {
+  foreignKey: 'idUser',
+  sourceKey: 'id',
+});
+
+OrderSchema.belongsTo(UserSchema, {
   foreignKey: 'idUser',
   targetKey: 'id',
 });

@@ -81,3 +81,22 @@ export const deleteOnePost = async (idPost: string) => {
 
   throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
 };
+
+export const updatePostPartially = async (id: string, data: { sold: boolean }) => {
+  if (!isNaN(Number(id)) && data) {
+    const postExist = await PostModels.findOne({ where: { id } });
+
+    if (postExist) {
+      postExist.set({ sold: data.sold });
+      await postExist.save();
+    }
+
+    return postExist;
+  }
+
+  throw new AppErrors({
+    message: 'ID must be a number | Needs data to update ',
+    httpCode: HttpStatusCode.BAD_REQUEST,
+    code: 4,
+  });
+};

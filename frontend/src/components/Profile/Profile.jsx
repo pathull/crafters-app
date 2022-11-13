@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSearchParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
+import Swal from 'sweetalert2';
 
 import './Profile.css';
 
-import { retrievePosts } from '../../services/fetchData';
+import { retrievePosts, updateStateOfPost, getSinglePostData } from '../../services/fetchData';
+import { createNewOrder } from '../../services/fetchOrders';
 import { PostLists } from '../PostLists/PostLists';
 import { UserInfo } from '../UserInfo/UserInfo';
 
@@ -14,11 +16,30 @@ export const Profile = () => {
   const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
 
-  if (searchParams.get('success') === 'true') {
-    console.log('Thank for your business');
-  } else if (searchParams.get('canceled') === 'true') {
-    console.log('Something went wrong');
-  }
+  useEffect(() => {
+    if (searchParams.get('success') === 'true') {
+      const idPost = searchParams.get('itemId');
+      const userId = searchParams.get('userId');
+
+      getSinglePostData(idPost).then(postData => {
+        if (!postData.sold) {
+          console.log('Render');
+          createNewOrder(userId, idPost).then(data => {
+            if (data.id) {
+              updateStateOfPost(idPost);
+
+              Swal.fire({
+                title: 'Thanks for supporting crafting community',
+                text: `Order number: ${data.id}`,
+                icon: 'success',
+                timer: 5000,
+              });
+            }
+          });
+        }
+      });
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (user) {

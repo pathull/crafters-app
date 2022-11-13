@@ -33,6 +33,7 @@ export const DetailsPost = () => {
     Swal.fire({
       title: 'Are your sure to delete this Post!',
       icon: 'question',
+      iconColor: '#d63031',
       showCancelButton: true,
       confirmButtonText: 'Delete',
       confirmButtonColor: '#002244',

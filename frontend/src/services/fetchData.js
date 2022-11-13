@@ -124,3 +124,23 @@ export const deleteSinglePost = async idPost => {
     console.error(err);
   }
 };
+
+export const updateStateOfPost = async idPost => {
+  try {
+    if (!isNaN(Number(idPost))) {
+      const data = await fetch(`${urlBase}/posts/update-post/${idPost}`, {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sold: true }),
+      });
+
+      return await data.json();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

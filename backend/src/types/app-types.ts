@@ -58,3 +58,11 @@ export interface IItem {
   item: IProductItem;
   userId: number;
 }
+
+export interface IOrder {
+  id?: number;
+  total_price: number;
+  total_quantity: number;
+  idPost?: number;
+  idUser?: number;
+}
