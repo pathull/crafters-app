@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillStarFill } from 'react-icons/bs';
+// import { motion } from 'framer-motion';
 
 import './SinglePost.css';
 
@@ -51,7 +52,11 @@ export const SinglePost = ({ post, setPostList }) => {
         </div>
       </Link>
 
-      <button onClick={star.wishlist ? removeToWishList : addToWishList}>
+      <button
+        // whileHover={{ scale: 1.1 }}
+        // whileTap={{ scale: 0.9 }}
+        onClick={star.wishlist ? removeToWishList : addToWishList}
+      >
         <BsFillStarFill className={`wishListStar ${star.wishlist ? 'isActive' : ''}`} />
       </button>
     </div>

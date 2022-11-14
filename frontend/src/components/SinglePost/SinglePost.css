@@ -6,14 +6,20 @@
 
 .wishListStar {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 7px;
+  right: 7px;
   color: white;
   font-size: 1.2rem;
 }
 
 .wishListStar:hover {
+  scale: 1.4;
   color: #ffc107;
+  transition: ease-in-out 0.3s;
+  -webkit-transition: ease-in-out 0.3s;
+  -moz-transition: ease-in-out 0.3s;
+  -ms-transition: ease-in-out 0.3s;
+  -o-transition: ease-in-out 0.3s;
 }
 
 .isActive {
