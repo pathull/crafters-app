@@ -16,39 +16,44 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, F
 
 import { createNewPost } from '../../services/fetchData';
 
+const initialPostState = {
+  title: '',
+  description: '',
+  price: 0,
+};
+
 export const NewPost = () => {
   const navigate = useNavigate();
   const { user } = useAuth0();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [state, setState] = useState(initialPostState);
   const [image, setImage] = useState([]);
-  const [price, setPrice] = useState(0);
   const [toggleBtn, setToggleBtn] = useState(false);
 
   const handleInputNumberChange = e => {
     if (e.target.value >= 0) {
-      if (/^\d*\.?\d{0,2}$/.test(e.target.value)) setPrice(e.target.value);
+      if (/^\d*\.?\d{0,2}$/.test(e.target.value)) setState({ ...state, price: e.target.value });
     }
+  };
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
   };
 
   const submitHandler = async e => {
     e.preventDefault();
     setToggleBtn(true);
 
-    if (title !== '' && image) {
+    if (state.title !== '' && image) {
       const post = {
         userEmail: user.email,
-        title,
-        price,
-        description,
+        ...state,
         postPicture: image[0].file,
       };
 
       const res = await createNewPost(post);
-      setTitle('');
-      setDescription('');
+      setState(initialPostState);
       setImage(null);
-      setPrice(0);
 
       if (res.id) {
         navigate('/profile');
@@ -89,8 +94,8 @@ export const NewPost = () => {
                 type="text"
                 name="title"
                 id="titlePost"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
+                value={state.title}
+                onChange={handleChange}
                 placeholder=" "
               />
               <label className="formTitle__label" htmlFor="titlePost">
@@ -103,8 +108,8 @@ export const NewPost = () => {
                 type="text"
                 name="description"
                 id="descriptionPost"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
+                value={state.description}
+                onChange={handleChange}
                 placeholder=" "
               />
               <label className="formTitle__label" htmlFor="descriptionPost">
@@ -120,7 +125,7 @@ export const NewPost = () => {
                 id="priceInput"
                 name="price"
                 onChange={handleInputNumberChange}
-                value={price.toLocaleString('en-US', {
+                value={state.price.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -154,9 +159,11 @@ export const NewPost = () => {
             </div>
             <motion.div className="formContainer__btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
               <button
-                className={`submitButton__newPost ${!title || !image.length || toggleBtn ? 'cursor-no-drop' : ''}`}
+                className={`submitButton__newPost ${
+                  !state.title || !image.length || toggleBtn ? 'cursor-no-drop' : ''
+                }`}
                 type="submit"
-                disabled={!title || !image.length}
+                disabled={!state.title || !image.length}
               >
                 Create New Post
               </button>

@@ -17,13 +17,17 @@ import { updateUserInfo } from '../../services/fetchData';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
+const initialUserState = {
+  name: '',
+  username: '',
+  bio: '',
+};
+
 export const EditUserProfile = () => {
   const navigate = useNavigate();
   const { userData, setUserData } = useContext(UserContext);
 
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [bio, setBio] = useState('');
+  const [state, setState] = useState(initialUserState);
   const [picture, setPicture] = useState([]);
   const [toggleBtn, setToggleBtn] = useState(false);
 
@@ -31,20 +35,25 @@ export const EditUserProfile = () => {
     if (!userData) {
       navigate('/profile');
     } else {
-      setName(userData.name);
-      setBio(userData.bio);
-      setUsername(userData.username);
+      setState({
+        name: userData.name,
+        bio: userData.bio,
+        username: userData.username,
+      });
     }
   }, [navigate, userData]);
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
     setToggleBtn(true);
 
     const userUpdate = {
-      username,
-      name,
-      bio,
+      ...state,
     };
 
     if (picture.length) {
@@ -54,9 +63,7 @@ export const EditUserProfile = () => {
     }
 
     const info = await updateUserInfo(userData.id, userUpdate);
-    setName('');
-    setUsername('');
-    setBio('');
+    setState(initialUserState);
     setPicture([]);
 
     if (!info.code) {
@@ -119,12 +126,12 @@ export const EditUserProfile = () => {
               </div>
               <div className="formContainer__title">
                 <input
-                  value={username}
+                  value={state.username}
                   className="formTitle__input focus:ring-0"
                   type="text"
                   name="username"
                   id="usernameInput"
-                  onChange={e => setUsername(e.target.value)}
+                  onChange={handleChange}
                   placeholder=" "
                 />
                 <label className="formTitle__label" htmlFor="usernameInput">
@@ -133,12 +140,12 @@ export const EditUserProfile = () => {
               </div>
               <div className="formContainer__title">
                 <input
-                  value={name}
+                  value={state.name}
                   className="formTitle__input focus:ring-0"
                   type="text"
                   name="name"
                   id="fullNameInput"
-                  onChange={e => setName(e.target.value)}
+                  onChange={handleChange}
                   placeholder=" "
                 />
                 <label className="formTitle__label" htmlFor="fullNameInput">
@@ -147,12 +154,12 @@ export const EditUserProfile = () => {
               </div>
               <div className="formContainer__title">
                 <textarea
-                  onChange={e => setBio(e.target.value)}
+                  onChange={handleChange}
                   className="formTitle__input focus:ring-0"
                   name="bio"
                   id="bioInput"
                   placeholder=" "
-                  value={bio}
+                  value={state.bio}
                 ></textarea>
                 <label className="formTitle__label" htmlFor="bioInput">
                   Bio
@@ -160,9 +167,9 @@ export const EditUserProfile = () => {
               </div>
               <motion.div className="formContainer__btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
                 <button
-                  className={`submitButton__newPost ${!name || toggleBtn ? 'cursor-no-drop' : ''}`}
+                  className={`submitButton__newPost ${!state.name || toggleBtn ? 'cursor-no-drop' : ''}`}
                   type="submit"
-                  disabled={!name}
+                  disabled={!state.name}
                 >
                   Update user
                 </button>

@@ -1,7 +1,7 @@
 {
-  "name": "backend-knitting-social-media",
+  "name": "crafters-social-media",
   "version": "1.0.0",
-  "description": "Solo Project - Backend for Knitting social media app",
+  "description": "Solo Project - Backend for crafters social media app",
   "main": "dist/app.js",
   "author": "Gustavo Silva Navarro <gustavo.silva.nav@gmail.com>",
   "license": "MIT",
@@ -18,7 +18,11 @@
     "Typescript",
     "Express",
     "SQL",
-    "REST API"
+    "REST API",
+    "MULTER",
+    "CLOUDINARY",
+    "SEQUELIZE",
+    "STRIPE"
   ],
   "dependencies": {
     "cloudinary": "^1.32.0",
