@@ -75,7 +75,6 @@
 .submitButton__newPost {
   flex: 1;
   padding: 0.5rem 0;
-  cursor: pointer;
   background-color: #463184;
   color: #fff;
   border-radius: 7px;

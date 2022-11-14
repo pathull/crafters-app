@@ -23,11 +23,18 @@ export const createNewPost = async post => {
         fd.append(name, post[name]);
       }
 
-      const data = await fetch(`${urlBase}/posts`, {
-        method: 'POST',
-        body: fd,
-      });
-      const resp = await data.json();
+      // const data = await fetch(`${urlBase}/posts`, {
+      //   method: 'POST',
+      //   mode: 'cors',
+      //   body: fd,
+      // });
+
+      // const resp = await data.json();
+      // return resp;
+
+      const data = await axios.post(`${urlBase}/posts`, fd);
+
+      const resp = data.data;
       return resp;
     }
   } catch (err) {

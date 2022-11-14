@@ -5,6 +5,7 @@ import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import { BallTriangle } from 'react-loader-spinner';
 
 import './NewPost.css';
 import 'filepond/dist/filepond.min.css';
@@ -21,6 +22,7 @@ export const NewPost = () => {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState([]);
   const [price, setPrice] = useState(0);
+  const [toggleBtn, setToggleBtn] = useState(false);
 
   const handleInputNumberChange = e => {
     if (e.target.value >= 0) {
@@ -30,6 +32,7 @@ export const NewPost = () => {
 
   const submitHandler = async e => {
     e.preventDefault();
+    setToggleBtn(true);
 
     if (title !== '' && image) {
       const post = {
@@ -48,9 +51,28 @@ export const NewPost = () => {
 
       if (res.id) {
         navigate('/profile');
+      } else {
+        setToggleBtn(true);
       }
     }
   };
+
+  if (toggleBtn) {
+    return (
+      <section className="createNewPost__container">
+        <div className="h-screen flex justify-center items-center">
+          <BallTriangle
+            height={200}
+            width={200}
+            radius={5}
+            color="#002244"
+            ariaLabel="ball-triangle-loading"
+            visible={true}
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="createNewPost__container">
@@ -95,7 +117,10 @@ export const NewPost = () => {
                 id="priceInput"
                 name="price"
                 onChange={handleInputNumberChange}
-                value={price}
+                value={price.toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
                 placeholder=" "
                 pattern="^\d*\.?\d{0,2}$"
               />
@@ -125,7 +150,11 @@ export const NewPost = () => {
               />
             </div>
             <div className="formContainer__btn">
-              <button className="submitButton__newPost" type="submit" disabled={!title || !image.length}>
+              <button
+                className={`submitButton__newPost ${!title || !image.length || toggleBtn ? 'cursor-no-drop' : ''}`}
+                type="submit"
+                disabled={!title || !image.length}
+              >
                 Create New Post
               </button>
             </div>

@@ -10,6 +10,7 @@ import { getSingleLike, addLikeToPost, deleteLike } from '../../services/fetchLi
 export const InteractionPanel = ({ post }) => {
   const { userData } = useContext(UserContext);
   const [likeStatus, setLikeStatus] = useState({ like: false });
+  const [togglePurchaseBtn, setTogglePurchaseBtn] = useState(false);
 
   useEffect(() => {
     getSingleLike(userData.id, post.id).then(res => {
@@ -20,6 +21,7 @@ export const InteractionPanel = ({ post }) => {
   }, [userData, post]);
 
   const handleCheckout = async () => {
+    setTogglePurchaseBtn(true);
     const item = {
       id: post.id,
       name: post.title,
@@ -61,17 +63,23 @@ export const InteractionPanel = ({ post }) => {
           {likeStatus.like ? <AiFillLike /> : <AiOutlineLike />}
         </button>
 
-        <button onClick={handleCheckout} className="panelPurchase__btn">
-          Buy for{' '}
-          <span className="font-bold">
-            {(post.price / 100).toLocaleString('en-US', {
-              style: 'currency',
-              currency: 'USD',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </span>
-        </button>
+        {userData.id !== post.user.id && !post.sold && post.price !== 0 ? (
+          <button
+            onClick={handleCheckout}
+            className={`panelPurchase__btn ${togglePurchaseBtn ? 'cursor-no-drop' : ''}`}
+            disabled={togglePurchaseBtn}
+          >
+            Buy for{' '}
+            <span className="font-bold">
+              {(post.price / 100).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
+          </button>
+        ) : null}
       </div>
     </div>
   );

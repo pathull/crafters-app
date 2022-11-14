@@ -5,6 +5,7 @@ import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import { BallTriangle } from 'react-loader-spinner';
 
 import './EditUserProfile.css';
 import 'filepond/dist/filepond.min.css';
@@ -23,6 +24,7 @@ export const EditUserProfile = () => {
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [picture, setPicture] = useState([]);
+  const [toggleBtn, setToggleBtn] = useState(false);
 
   useEffect(() => {
     if (!userData) {
@@ -36,6 +38,7 @@ export const EditUserProfile = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setToggleBtn(true);
 
     const userUpdate = {
       username,
@@ -59,9 +62,27 @@ export const EditUserProfile = () => {
       setUserData(info);
       navigate('/profile');
     } else {
+      setToggleBtn(false);
       console.log('Error in the operation');
     }
   };
+
+  if (toggleBtn) {
+    return (
+      <section className="createNewPost__container">
+        <div className="h-screen flex justify-center items-center">
+          <BallTriangle
+            height={200}
+            width={200}
+            radius={5}
+            color="#002244"
+            ariaLabel="ball-triangle-loading"
+            visible={true}
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="profileSection">
@@ -135,7 +156,11 @@ export const EditUserProfile = () => {
                 </label>
               </div>
               <div className="formContainer__btn">
-                <button className="submitButton__newPost" type="submit" disabled={!name}>
+                <button
+                  className={`submitButton__newPost ${!name || toggleBtn ? 'cursor-no-drop' : ''}`}
+                  type="submit"
+                  disabled={!name}
+                >
                   Update user
                 </button>
               </div>
