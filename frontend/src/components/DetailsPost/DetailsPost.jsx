@@ -67,7 +67,7 @@ export const DetailsPost = () => {
                 <div className="detailInfo__user">
                   <img loading="lazy" src={post.user.userPicUrl} alt={post.user.username} />
                   <div>
-                    <h4 className="userInfo__username">{post.user.username}</h4>
+                    <h4 className="userInfoTitle__username">{post.user.username}</h4>
                     <span className="timeFormat__comments">{moment(post.updatedAt).fromNow()}</span>
                   </div>
                 </div>

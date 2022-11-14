@@ -1,8 +1,8 @@
-const urlBase = 'http://localhost:8080';
+import { env } from '../helpers/env';
 
 export const getSingleLike = async (idUser, idPost) => {
   try {
-    const data = await fetch(`${urlBase}/likes/user/${idUser}/post/${idPost}`, {
+    const data = await fetch(`${env.urlBase}/likes/user/${idUser}/post/${idPost}`, {
       method: 'GET',
       mode: 'cors',
     });
@@ -15,7 +15,7 @@ export const getSingleLike = async (idUser, idPost) => {
 
 export const addLikeToPost = async body => {
   try {
-    const data = await fetch(`${urlBase}/likes`, {
+    const data = await fetch(`${env.urlBase}/likes`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -33,7 +33,7 @@ export const addLikeToPost = async body => {
 
 export const deleteLike = async id => {
   try {
-    const res = await fetch(`${urlBase}/likes/delete/${id}`, {
+    const res = await fetch(`${env.urlBase}/likes/delete/${id}`, {
       method: 'DELETE',
       mode: 'cors',
     });

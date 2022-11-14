@@ -1,9 +1,9 @@
-const urlBase = 'http://localhost:8080';
+import { env } from '../helpers/env';
 
 export const createNewComment = async newComment => {
   try {
     if (newComment) {
-      const data = await fetch(`${urlBase}/comments`, {
+      const data = await fetch(`${env.urlBase}/comments`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -24,7 +24,7 @@ export const createNewComment = async newComment => {
 export const getCommentsByPost = async id => {
   try {
     if (!isNaN(Number(id))) {
-      const allComments = await fetch(`${urlBase}/comments/${id}`, {
+      const allComments = await fetch(`${env.urlBase}/comments/${id}`, {
         method: 'GET',
         mode: 'cors',
       });
@@ -39,7 +39,7 @@ export const getCommentsByPost = async id => {
 export const deleteComment = async idComment => {
   try {
     if (!isNaN(Number(idComment))) {
-      const data = await fetch(`${urlBase}/comments/delete/${idComment}`, {
+      const data = await fetch(`${env.urlBase}/comments/delete/${idComment}`, {
         method: 'DELETE',
         mode: 'cors',
       });

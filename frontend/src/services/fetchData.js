@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const urlBase = 'http://localhost:8080';
+import { env } from '../helpers/env';
 
 export const retrievePosts = async email => {
   try {
     if (!email) return;
 
-    const data = await fetch(`${urlBase}/posts/${email}`);
+    const data = await fetch(`${env.urlBase}/posts/${email}`);
     const posts = await data.json();
 
     return posts;
@@ -23,16 +23,7 @@ export const createNewPost = async post => {
         fd.append(name, post[name]);
       }
 
-      // const data = await fetch(`${urlBase}/posts`, {
-      //   method: 'POST',
-      //   mode: 'cors',
-      //   body: fd,
-      // });
-
-      // const resp = await data.json();
-      // return resp;
-
-      const data = await axios.post(`${urlBase}/posts`, fd);
+      const data = await axios.post(`${env.urlBase}/posts`, fd);
 
       const resp = data.data;
       return resp;
@@ -45,7 +36,7 @@ export const createNewPost = async post => {
 export const retrieveUser = async userEmail => {
   try {
     if (!userEmail) return;
-    const data = await fetch(`${urlBase}/user/${userEmail}`);
+    const data = await fetch(`${env.urlBase}/user/${userEmail}`);
     const newUser = await data.json();
 
     return newUser;
@@ -56,7 +47,7 @@ export const retrieveUser = async userEmail => {
 
 export const storeUser = async body => {
   try {
-    const data = await fetch(`${urlBase}/user`, {
+    const data = await fetch(`${env.urlBase}/user`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -82,7 +73,7 @@ export const updateUserInfo = async (id, info) => {
         formData.append(name, info[name]);
       }
 
-      const data = await axios.put(`${urlBase}/user/${id}`, formData);
+      const data = await axios.put(`${env.urlBase}/user/${id}`, formData);
 
       const userUpdated = data.data;
       return userUpdated;
@@ -96,7 +87,7 @@ export const getSinglePostData = async id => {
   try {
     if (!id) return;
 
-    const singlePost = await axios.get(`${urlBase}/posts/single-post/${id}`);
+    const singlePost = await axios.get(`${env.urlBase}/posts/single-post/${id}`);
 
     if (singlePost.status === 200) return singlePost.data;
     else return null;
@@ -107,7 +98,7 @@ export const getSinglePostData = async id => {
 
 export const getAllPosts = async () => {
   try {
-    const data = await fetch(`${urlBase}/listPosts`);
+    const data = await fetch(`${env.urlBase}/listPosts`);
 
     const allPosts = await data.json();
 
@@ -120,7 +111,7 @@ export const getAllPosts = async () => {
 export const deleteSinglePost = async idPost => {
   try {
     if (!isNaN(Number(idPost))) {
-      const data = await fetch(`${urlBase}/posts/delete-post/${idPost}`, {
+      const data = await fetch(`${env.urlBase}/posts/delete-post/${idPost}`, {
         method: 'DELETE',
         mode: 'cors',
       });
@@ -135,7 +126,7 @@ export const deleteSinglePost = async idPost => {
 export const updateStateOfPost = async idPost => {
   try {
     if (!isNaN(Number(idPost))) {
-      const data = await fetch(`${urlBase}/posts/update-post/${idPost}`, {
+      const data = await fetch(`${env.urlBase}/posts/update-post/${idPost}`, {
         method: 'PATCH',
         mode: 'cors',
         headers: {

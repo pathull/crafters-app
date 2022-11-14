@@ -1,8 +1,8 @@
-const urlBase = 'http://localhost:8080';
+import { env } from '../helpers/env';
 
 export const getSingleWish = async (idUser, idPost) => {
   try {
-    const data = await fetch(`${urlBase}/wishlist/user/${idUser}/post/${idPost}`, {
+    const data = await fetch(`${env.urlBase}/wishlist/user/${idUser}/post/${idPost}`, {
       method: 'GET',
       mode: 'cors',
     });
@@ -15,7 +15,7 @@ export const getSingleWish = async (idUser, idPost) => {
 
 export const addPostToWishList = async body => {
   try {
-    const data = await fetch(`${urlBase}/wishlist`, {
+    const data = await fetch(`${env.urlBase}/wishlist`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -33,7 +33,7 @@ export const addPostToWishList = async body => {
 
 export const deleteWish = async id => {
   try {
-    const res = await fetch(`${urlBase}/wishlist/delete/${id}`, {
+    const res = await fetch(`${env.urlBase}/wishlist/delete/${id}`, {
       method: 'DELETE',
       mode: 'cors',
     });
@@ -46,7 +46,7 @@ export const deleteWish = async id => {
 
 export const getListWishListByUser = async idUser => {
   try {
-    const data = await fetch(`${urlBase}/wishlist/${idUser}`, {
+    const data = await fetch(`${env.urlBase}/wishlist/${idUser}`, {
       method: 'GET',
       mode: 'cors',
     });

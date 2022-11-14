@@ -136,16 +136,6 @@ export const NewPost = () => {
                 Price
               </label>
             </div>
-            {/* <div className="formContainer__image">
-              <label htmlFor="postPicture">Image</label>
-              <input
-                type="file"
-                name="postPicture"
-                id="postPicture"
-                accept="image/*"
-                onChange={e => setImage(e.target.files[0])}
-              />
-            </div> */}
             <div className="formContainer__image">
               <FilePond
                 files={image}

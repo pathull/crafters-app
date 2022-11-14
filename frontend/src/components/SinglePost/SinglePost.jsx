@@ -2,10 +2,13 @@ import { useEffect, useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillStarFill } from 'react-icons/bs';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import './SinglePost.css';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { UserContext } from '../../context/UserContext';
+import { env } from '../../helpers/env';
 import { getSingleWish, addPostToWishList, deleteWish, getListWishListByUser } from '../../services/fetchWishList';
 
 export const SinglePost = ({ post, setPostList }) => {
@@ -54,7 +57,16 @@ export const SinglePost = ({ post, setPostList }) => {
     >
       <Link to={`/details-post/${post.id}`}>
         <div className="singlePicture__container">
-          <img loading="lazy" className="singlePost__image" src={post.postPicUrl} alt={post.title} />
+          <LazyLoadImage
+            loading="lazy"
+            className="singlePost__image"
+            src={post.postPicUrl}
+            alt={post.title}
+            effect="blur"
+            height={250}
+            width={200}
+            placeholderSrc={env.imagePlaceHolder}
+          />
         </div>
       </Link>
 

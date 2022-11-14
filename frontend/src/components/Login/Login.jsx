@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
-import './Login.css';
-
 export const Login = () => {
   const navigate = useNavigate();
   const { loginWithPopup, isAuthenticated } = useAuth0();

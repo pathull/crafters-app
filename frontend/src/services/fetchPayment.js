@@ -1,8 +1,8 @@
-const urlBase = 'http://localhost:8080';
+import { env } from '../helpers/env';
 
 export const paymentApi = async item => {
   try {
-    const res = await fetch(`${urlBase}/purchase/create-checkout-session`, {
+    const res = await fetch(`${env.urlBase}/purchase/create-checkout-session`, {
       method: 'POST',
       mode: 'cors',
       headers: {

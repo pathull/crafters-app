@@ -3,37 +3,10 @@ import { Link } from 'react-router-dom';
 
 import './UserInfo.css';
 
-// import { retrieveUser, storeUser } from '../../services/fetchData';
 import { UserContext } from '../../context/UserContext';
 
 export const UserInfo = ({ user, postNumber }) => {
-  // const [userInfo, setUserInfo] = useState(null);
   const { userData } = useContext(UserContext);
-
-  // useEffect(() => {
-  //   if (user && !userData) {
-  //     retrieveUser(user.email).then(data => {
-  //       if (data) {
-  //         setUserData(data);
-  //       } else {
-  //         const newUser = {
-  //           email: user.email,
-  //           bio: '',
-  //           username: user.nickname,
-  //           name: '',
-  //         };
-
-  //         storeUser(newUser).then(info => {
-  //           if (!info.error) {
-  //             setUserData(info);
-  //           }
-  //         });
-  //       }
-  //     });
-  //   }
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // console.log(userData);
 
   return (
     <div className="singleFlexProp">

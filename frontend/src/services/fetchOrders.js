@@ -1,8 +1,8 @@
-const urlBase = 'http://localhost:8080';
+import { env } from '../helpers/env';
 
 export const createNewOrder = async (idUser, idPost) => {
   try {
-    const result = await fetch(`${urlBase}/orders/create-order/user/${idUser}/post/${idPost}`, {
+    const result = await fetch(`${env.urlBase}/orders/create-order/user/${idUser}/post/${idPost}`, {
       method: 'POST',
       mode: 'cors',
       headers: {
