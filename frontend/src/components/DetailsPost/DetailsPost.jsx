@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FiDelete } from 'react-icons/fi';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import { motion } from 'framer-motion';
 
 import './DetailsPost.css';
 
@@ -51,7 +52,12 @@ export const DetailsPost = () => {
   return (
     <section className="profileSection">
       {post ? (
-        <div className="detailsPost">
+        <motion.div
+          className="detailsPost"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="detailsPost__container">
             <div className="singlePostContainer__image">
               <img loading="lazy" src={post.postPicUrl} alt={post.title} />
@@ -102,7 +108,7 @@ export const DetailsPost = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       ) : (
         <div className="missingPost__container">
           <div className="missingPost__container--div">

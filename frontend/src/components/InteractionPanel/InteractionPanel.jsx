@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 
 import './InteractionPanel.css';
 
@@ -59,12 +60,19 @@ export const InteractionPanel = ({ post }) => {
   return (
     <div className="sectionPanel__container">
       <div className="sectionPanel__elements">
-        <button className="likeIcon" onClick={likeStatus.like ? removeLike : likePost}>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="likeIcon"
+          onClick={likeStatus.like ? removeLike : likePost}
+        >
           {likeStatus.like ? <AiFillLike /> : <AiOutlineLike />}
-        </button>
+        </motion.button>
 
         {userData.id !== post.user.id && !post.sold && post.price !== 0 ? (
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={handleCheckout}
             className={`panelPurchase__btn ${togglePurchaseBtn ? 'cursor-no-drop' : ''}`}
             disabled={togglePurchaseBtn}
@@ -78,7 +86,7 @@ export const InteractionPanel = ({ post }) => {
                 maximumFractionDigits: 2,
               })}
             </span>
-          </button>
+          </motion.button>
         ) : null}
       </div>
     </div>

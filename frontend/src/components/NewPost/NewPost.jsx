@@ -6,6 +6,7 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import { BallTriangle } from 'react-loader-spinner';
+import { motion } from 'framer-motion';
 
 import './NewPost.css';
 import 'filepond/dist/filepond.min.css';
@@ -61,14 +62,16 @@ export const NewPost = () => {
     return (
       <section className="createNewPost__container">
         <div className="h-screen flex justify-center items-center">
-          <BallTriangle
-            height={200}
-            width={200}
-            radius={5}
-            color="#002244"
-            ariaLabel="ball-triangle-loading"
-            visible={true}
-          />
+          <motion.div className="cursor-grabbing" drag dragConstraints={{ top: -70, left: -70, right: 70, bottom: 70 }}>
+            <BallTriangle
+              height={200}
+              width={200}
+              radius={5}
+              color="#002244"
+              ariaLabel="ball-triangle-loading"
+              visible={true}
+            />
+          </motion.div>
         </div>
       </section>
     );
@@ -149,7 +152,7 @@ export const NewPost = () => {
                 labelIdle="Drag & Drop your files or <span class=filepond--label-action>Browse</span>"
               />
             </div>
-            <div className="formContainer__btn">
+            <motion.div className="formContainer__btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
               <button
                 className={`submitButton__newPost ${!title || !image.length || toggleBtn ? 'cursor-no-drop' : ''}`}
                 type="submit"
@@ -157,7 +160,7 @@ export const NewPost = () => {
               >
                 Create New Post
               </button>
-            </div>
+            </motion.div>
           </form>
         </div>
       </div>

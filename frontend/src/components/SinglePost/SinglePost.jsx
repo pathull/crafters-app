@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillStarFill } from 'react-icons/bs';
-// import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import './SinglePost.css';
 
@@ -45,20 +45,22 @@ export const SinglePost = ({ post, setPostList }) => {
   };
 
   return (
-    <div className="singlePostContainer relative">
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="singlePostContainer relative"
+    >
       <Link to={`/details-post/${post.id}`}>
         <div className="singlePicture__container">
           <img loading="lazy" className="singlePost__image" src={post.postPicUrl} alt={post.title} />
         </div>
       </Link>
 
-      <button
-        // whileHover={{ scale: 1.1 }}
-        // whileTap={{ scale: 0.9 }}
-        onClick={star.wishlist ? removeToWishList : addToWishList}
-      >
+      <button onClick={star.wishlist ? removeToWishList : addToWishList}>
         <BsFillStarFill className={`wishListStar ${star.wishlist ? 'isActive' : ''}`} />
       </button>
-    </div>
+    </motion.div>
   );
 };
