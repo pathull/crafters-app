@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSearchParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
@@ -7,14 +7,27 @@ import Swal from 'sweetalert2';
 import './Profile.css';
 
 import { retrievePosts, updateStateOfPost, getSinglePostData } from '../../services/fetchData';
+import { getNumberOfFavs } from '../../services/fetchWishList';
 import { createNewOrder } from '../../services/fetchOrders';
 import { PostLists } from '../PostLists/PostLists';
 import { UserInfo } from '../UserInfo/UserInfo';
+import { UserContext } from '../../context/UserContext';
 
 export const Profile = () => {
+  const { userData } = useContext(UserContext);
   const { user } = useAuth0();
   const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
+  const [numberOfFavs, setNumberOfFavs] = useState(0);
+
+  useEffect(() => {
+    if (user) {
+      retrievePosts(user.email).then(data => setPosts(data));
+      if (userData) {
+        getNumberOfFavs(userData.id).then(result => setNumberOfFavs(result.number));
+      }
+    }
+  }, [user, userData]);
 
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
@@ -41,17 +54,11 @@ export const Profile = () => {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    if (user) {
-      retrievePosts(user.email).then(data => setPosts(data));
-    }
-  }, [user]);
-
   return (
     <section className="profileSection">
       {user ? (
         <div className="profileContainer">
-          <UserInfo user={user} postNumber={posts.length} />
+          <UserInfo user={user} postNumber={posts.length} numberOfFavs={numberOfFavs} />
 
           <div className="listContainer__posts">
             <PostLists postsList={posts} />

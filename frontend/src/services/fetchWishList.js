@@ -56,3 +56,16 @@ export const getListWishListByUser = async idUser => {
     console.error(err);
   }
 };
+
+export const getNumberOfFavs = async idUser => {
+  try {
+    const data = await fetch(`${env.urlBase}/wishlist/number-favs/${idUser}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
+
+    return await data.json();
+  } catch (err) {
+    console.error(err);
+  }
+};

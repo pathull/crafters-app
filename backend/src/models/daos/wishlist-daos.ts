@@ -47,6 +47,7 @@ export const listWishByUser = async (idUser: string) => {
       include: {
         model: PostSchema,
       },
+      order: [['createdAt', 'DESC']],
     });
 
     if (allWishes.length) {
@@ -56,6 +57,16 @@ export const listWishByUser = async (idUser: string) => {
     } else {
       return [];
     }
+  }
+
+  throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });
+};
+
+export const getNumberOfYOurWishList = async (idUser: string) => {
+  if (!isNaN(Number(idUser))) {
+    const number = await WishListModel.count({ where: { idUser } });
+
+    return number;
   }
 
   throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 4 });

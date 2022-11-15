@@ -10,6 +10,11 @@ export const Sidebar = () => {
   const [toggleButton, setToggleButton] = useState(true);
   const { logout } = useAuth0();
 
+  const handleLogoutUser = () => {
+    localStorage.removeItem('token');
+    logout({ returnTo: window.location.origin });
+  };
+
   return (
     <div className={`bg-dark-blue h-screen p-3 pt-8 ${toggleButton ? 'w-72' : 'w-20'} duration-300 relative`}>
       <BsArrowLeftShort
@@ -29,7 +34,7 @@ export const Sidebar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center rounded-md bg-light-white mt-6 px-4 py-2">
+      <div className="items-center rounded-md bg-light-white mt-6 px-4 py-2 hidden">
         <BsSearch className="text-white my-1" />
         <input
           type="text"
@@ -73,7 +78,7 @@ export const Sidebar = () => {
 
         <li className="text-white duration-300 mt-2 rounded-md hover:bg-light-white">
           <button
-            onClick={() => logout({ returnTo: window.location.origin })}
+            onClick={handleLogoutUser}
             className={`p-2 cursor-pointer text-lg flex items-center ${toggleButton ? 'gap-x-4' : ''}`}
           >
             <FiLogOut className="text-2xl" />

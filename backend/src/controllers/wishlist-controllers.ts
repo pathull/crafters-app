@@ -1,6 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { addWishListToDb, deleteSingleWish, listWishByUser, getSingleWishList } from '../models/daos/wishlist-daos';
+import {
+  addWishListToDb,
+  deleteSingleWish,
+  listWishByUser,
+  getSingleWishList,
+  getNumberOfYOurWishList,
+} from '../models/daos/wishlist-daos';
 
 export const addToTheWishList = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -40,6 +46,16 @@ export const getOneWish = async (req: Request, res: Response, next: NextFunction
 
     if (result) return res.status(200).json(result);
     res.status(200).json({ message: 'Wish does not exist', error: true });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+export const numberOfFavs = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await getNumberOfYOurWishList(req.params.idUser);
+    res.status(200).json({ number: result });
   } catch (err) {
     console.error(err);
     next(err);

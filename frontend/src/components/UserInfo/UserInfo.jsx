@@ -5,7 +5,7 @@ import './UserInfo.css';
 
 import { UserContext } from '../../context/UserContext';
 
-export const UserInfo = ({ user, postNumber }) => {
+export const UserInfo = ({ user, postNumber, numberOfFavs }) => {
   const { userData } = useContext(UserContext);
 
   return (
@@ -30,8 +30,7 @@ export const UserInfo = ({ user, postNumber }) => {
             <span className="individualStats">{postNumber}</span> posts
           </p>
           <p className="statistics">
-            <span className="individualStats">{userData && userData.auction_wins ? userData.auction_wins : 0} </span>{' '}
-            wins
+            <span className="individualStats">{numberOfFavs} </span> favs
           </p>
         </div>
         <p className="user__fullName">{userData && userData.name ? userData.name : user.name}</p>

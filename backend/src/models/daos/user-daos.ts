@@ -1,12 +1,13 @@
 import fs from 'fs-extra';
 
 import UserSchema from '../schemas/user-schema';
+import { checkValidEmail } from '../../helpers/helper-functions';
 import { IUser, IFileImage } from '../../types/app-types';
 import { AppErrors, HttpStatusCode } from '../../helpers/app-error';
 import { uploadImage, deleteImage } from '../../services/cloudinary';
 
 export const retrieveUserInfo = async (email: string) => {
-  if (email && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+  if (email && checkValidEmail(email)) {
     const user = await UserSchema.findOne({
       where: {
         email,
@@ -21,7 +22,7 @@ export const retrieveUserInfo = async (email: string) => {
 
 export const createNewUser = async (info: IUser) => {
   const { email, bio, username, name, userPicUrl } = info;
-  if (email && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+  if (email && checkValidEmail(email)) {
     const userFound = await retrieveUserInfo(email);
     console.log(userFound);
 

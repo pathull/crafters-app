@@ -6,7 +6,10 @@ export const retrievePosts = async email => {
   try {
     if (!email) return;
 
-    const data = await fetch(`${env.urlBase}/posts/${email}`);
+    const data = await fetch(`${env.urlBase}/posts/${email}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
     const posts = await data.json();
 
     return posts;
@@ -23,9 +26,12 @@ export const createNewPost = async post => {
         fd.append(name, post[name]);
       }
 
-      const data = await axios.post(`${env.urlBase}/posts`, fd);
+      const data = await fetch(`${env.urlBase}/posts`, {
+        method: 'POST',
+        body: fd,
+      });
 
-      const resp = data.data;
+      const resp = await data.json();
       return resp;
     }
   } catch (err) {
@@ -36,7 +42,10 @@ export const createNewPost = async post => {
 export const retrieveUser = async userEmail => {
   try {
     if (!userEmail) return;
-    const data = await fetch(`${env.urlBase}/user/${userEmail}`);
+    const data = await fetch(`${env.urlBase}/user/${userEmail}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
     const newUser = await data.json();
 
     return newUser;
@@ -87,7 +96,10 @@ export const getSinglePostData = async id => {
   try {
     if (!id) return;
 
-    const singlePost = await axios.get(`${env.urlBase}/posts/single-post/${id}`);
+    const singlePost = await axios.get(`${env.urlBase}/posts/single-post/${id}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
 
     if (singlePost.status === 200) return singlePost.data;
     else return null;
@@ -98,7 +110,10 @@ export const getSinglePostData = async id => {
 
 export const getAllPosts = async () => {
   try {
-    const data = await fetch(`${env.urlBase}/listPosts`);
+    const data = await fetch(`${env.urlBase}/listPosts`, {
+      method: 'GET',
+      mode: 'cors',
+    });
 
     const allPosts = await data.json();
 

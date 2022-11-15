@@ -2,13 +2,14 @@ import fs from 'fs-extra';
 
 import PostModels from '../schemas/post-models';
 import UserModel from '../schemas/user-schema';
+import { checkValidEmail, checkTwoDecimalNumber } from '../../helpers/helper-functions';
 
 import { uploadImage, deleteImage } from '../../services/cloudinary';
 import { IPost, IFileImage } from '../../types/app-types';
 import { AppErrors, HttpStatusCode } from '../../helpers/app-error';
 
 export const retrievePostsData = async (email: string) => {
-  if (/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+  if (checkValidEmail(email)) {
     const allPosts = await PostModels.findAll({
       where: {
         userEmail: email,
@@ -28,7 +29,7 @@ export const addNewPost = async (info: IPost, image: IFileImage) => {
     const result = await uploadImage(image.path, 'posts');
 
     let money = 0;
-    if (price && /^\d*\.?\d{0,2}$/.test(String(price))) {
+    if (price && checkTwoDecimalNumber(String(price))) {
       money = price;
     }
 

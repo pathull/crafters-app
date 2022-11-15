@@ -2,6 +2,8 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
+import env from '../utils/env';
+// import { verifyJwt } from '../middleware/auth';
 import mainRoutes from '../routes/main-routes';
 import userRoutes from '../routes/user-routes';
 import postRoutes from '../routes/post-routes';
@@ -20,9 +22,10 @@ app.set('port', process.env.PORT || 8080);
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: env.clientAppUrl,
   })
 );
+// app.use(verifyJwt);
 app.use(morgan('dev'));
 
 app.use('/listPosts', mainRoutes);

@@ -13,21 +13,4 @@ export const errorHandler = (err: AppErrors, _req: Request, res: Response, next:
       error: err.error || true,
     },
   });
-
-  //! Second option works but I need to change err:Error
-  // if (err instanceof AppErrors) {
-  //   res.status(err.status).send({
-  //     error: err,
-  //   });
-  // } else {
-  //   res.status(500).json({
-  //     error: {
-  //       name: err.name || 'Error',
-  //       message: err.message,
-  //       status: 500,
-  //       trace: err.stack || 'Stack not available',
-  //       code: -1,
-  //     },
-  //   });
-  // }
 };
