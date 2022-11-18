@@ -9,6 +9,9 @@
 /.pnp
 .pnp.js
 
+# Enviromental Variables
+/.env
+
 # misc
 .DS_Store
 .env.local
