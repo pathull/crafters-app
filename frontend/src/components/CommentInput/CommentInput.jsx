@@ -48,7 +48,7 @@ export const CommentInput = ({ idUser, idPost, setComments }) => {
           placeholder="Add a comment..."
           required
         ></textarea>
-        <button className="addComment__btn" disabled={comment | (comment === '')}>
+        <button className="addComment__btn" name="comment-btn" disabled={comment | (comment === '')}>
           <FaTelegramPlane />
         </button>
       </form>
