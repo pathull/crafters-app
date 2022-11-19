@@ -24,3 +24,12 @@ export const singleMockNew = {
   userEmail:"d@test.com"
 
 }
+
+export const mockInfoOnWishlist = {
+  createdAt:"2022-11-18T16:22:23.570Z",
+  id:2,
+  idPost:2,
+  idUser:1,
+  updatedAt:"2022-11-18T16:22:23.570Z",
+  wishlist:true
+}

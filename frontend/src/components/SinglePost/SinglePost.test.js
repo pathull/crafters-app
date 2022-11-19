@@ -1,9 +1,10 @@
 
 import { SinglePost } from "./SinglePost";
-import { singleMock, singleMockNew } from '../../mocks/SinglePostMock';
+import { singleMock, singleMockNew, mockInfoOnWishlist } from '../../mocks/SinglePostMock';
+import { MockPostListNew } from '../../mocks/PostListMocks';
 import nock from 'nock';
 import { env } from '../../helpers/env';
-import { render } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from 'react-router-dom';
 import { UserContext } from "../../context/UserContext";
 
@@ -14,7 +15,7 @@ nock(`${env.urlBase}`)
     'access-control-allow-origin': '*',
   })
   .get(`/wishlist/user/1/post/2`)
-  .reply(200, singleMock);
+  .reply(200, mockInfoOnWishlist);
 
 //post/delete a wish
 nock(`${env.urlBase}`)
@@ -23,7 +24,7 @@ nock(`${env.urlBase}`)
     'access-control-allow-origin': '*',
   })
   .post(`/wishlist/`)
-  .reply(201, singleMockNew);
+  .reply(201, mockInfoOnWishlist);
 
 nock(`${env.urlBase}`)
   .persist()
@@ -31,7 +32,7 @@ nock(`${env.urlBase}`)
     'access-control-allow-origin': '*',
   })
   .delete(`/wishlist/user/1/post/99`)
-  .reply(200, singleMockNew);
+  .reply(202, {wishList: false});
 
 //get updates wishlist
 nock(`${env.urlBase}`)
@@ -39,19 +40,34 @@ nock(`${env.urlBase}`)
   .defaultReplyHeaders({
     'access-control-allow-origin': '*',
   })
-  .delete(`/wishlist/user/1/post/2`)
-  .reply(200, singleMock);
+  .get(`/wishlist/user/1/`)
+  .reply(200, MockPostListNew);
 
 describe('Single post component', () => {
-  it('should be removed/added to the wishlist on star click', () => {
+  it('should be added to the wishlist on star is active', async () => {
     const userData = {id: 1};
-    const post = {id: 2};
+    const post = singleMock;
     render(
       <UserContext.Provider value={{ userData }}>
         <SinglePost post={post}/>
       </UserContext.Provider>, {wrapper: BrowserRouter}
     )
-
+    await waitFor(()=> {
+      expect(screen.getByAltText('Verve')).toBeDefined();
+    });
   })
 
-})
+  // it('should be removed from the wishlist on star is not active', async () => {
+  //   const userData = {id: 1};
+  //   const post = singleMockNew;
+  //   render(
+  //     <UserContext.Provider value={{ userData }}>
+  //       <SinglePost post={post}/>
+  //     </UserContext.Provider>, {wrapper: BrowserRouter}
+  //   )
+  //   await waitFor(()=> {
+  //     expect(screen.getByText('')).toBeDefined();
+  //   });
+  // })
+
+});

@@ -20,6 +20,7 @@ export const SinglePost = ({ post, setPostList }) => {
     if (post && userData) {
       getSingleWish(userData.id, post.id).then(info => {
         if (!info.error) {
+          console.log(info);
           setStar(info);
         }
       });
@@ -30,6 +31,7 @@ export const SinglePost = ({ post, setPostList }) => {
     const added = await addPostToWishList({ idUser: userData.id, idPost: post.id });
 
     if (!added.error) {
+      console.log(added);
       setStar(added);
     }
   };
