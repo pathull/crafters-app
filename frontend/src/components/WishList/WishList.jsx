@@ -7,7 +7,6 @@ import { getListWishListByUser } from '../../services/fetchWishList';
 export const WishList = () => {
   const [postList, setPostList] = useState([]);
   const { userData } = useContext(UserContext);
-  console.log(userData);
 
   useEffect(() => {
     if (userData) {

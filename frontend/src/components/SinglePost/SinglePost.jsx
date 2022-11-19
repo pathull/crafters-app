@@ -20,7 +20,6 @@ export const SinglePost = ({ post, setPostList }) => {
     if (post && userData) {
       getSingleWish(userData.id, post.id).then(info => {
         if (!info.error) {
-          console.log(info);
           setStar(info);
         }
       });
@@ -73,7 +72,7 @@ export const SinglePost = ({ post, setPostList }) => {
       </Link>
 
       <button onClick={star.wishlist ? removeToWishList : addToWishList}>
-        <BsFillStarFill className={`wishListStar ${star.wishlist ? 'isActive' : ''}`} />
+        <BsFillStarFill data-testid="wish-button" className={`wishListStar ${star.wishlist ? 'isActive' : ''}`} />
       </button>
     </motion.div>
   );

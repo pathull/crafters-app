@@ -3,6 +3,7 @@ import { mockPostList } from '../../mocks/PostListMocks';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('PostList component', () => {
 
@@ -27,14 +28,20 @@ describe('PostList component', () => {
     expect(screen.getByText('No posts inserted yet')).toBeInTheDocument();
   })
 
+  // jest.mock("react-router-dom", () => ({
+  //   ...jest.requireActual("react-router-dom"),
+  //   useLocation: () => ({
+  //     pathname: "/profile"
+  //   })
+  //}));
   test('it should render the create post button from empty profile page', () => {
     const emptyMockPosts = [];
-    const location = {pathname: '/profile'};
 
     render(
-      <PostLists postsList={emptyMockPosts} location={location}/>, {wrapper: BrowserRouter()}
+      <MemoryRouter initialEntries={[{ pathname: '/profile'}]}>
+      <PostLists postsList={emptyMockPosts}/>
+      </MemoryRouter>
     )
     expect(screen.getByText('Create Post')).toBeInTheDocument();
-    //figure out how to pass in the location to the render method.
   })
 });
