@@ -39,5 +39,8 @@
     "clean:backend": "cd backend && yarn run clean",
     "prepare:prod": "cd backend && yarn run start:production",
     "prepare": "husky install"
+  },
+  "dependencies": {
+    "nock": "^13.2.9"
   }
 }
