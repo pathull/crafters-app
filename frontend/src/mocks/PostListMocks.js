@@ -1,4 +1,4 @@
-export const mockWishList = [{
+export const mockPostList = [{
   createdAt:"2022-11-18T16:00:14.922Z",
   description:"i love palm trees",
   id:1,
