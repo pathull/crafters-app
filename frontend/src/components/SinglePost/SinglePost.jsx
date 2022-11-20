@@ -71,8 +71,8 @@ export const SinglePost = ({ post, setPostList }) => {
         </div>
       </Link>
 
-      <button onClick={star.wishlist ? removeToWishList : addToWishList}>
-        <BsFillStarFill data-testid="wish-button" className={`wishListStar ${star.wishlist ? 'isActive' : ''}`} />
+      <button data-testid="wish-button" onClick={star.wishlist ? removeToWishList : addToWishList}>
+        <BsFillStarFill data-testid="wish-button-star" className={`wishListStar ${star.wishlist ? 'isActive' : ''}`} />
       </button>
     </motion.div>
   );
