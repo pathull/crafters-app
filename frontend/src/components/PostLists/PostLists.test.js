@@ -28,12 +28,7 @@ describe('PostList component', () => {
     expect(screen.getByText('No posts inserted yet')).toBeInTheDocument();
   })
 
-  // jest.mock("react-router-dom", () => ({
-  //   ...jest.requireActual("react-router-dom"),
-  //   useLocation: () => ({
-  //     pathname: "/profile"
-  //   })
-  //}));
+
   test('it should render the create post button from empty profile page', () => {
     const emptyMockPosts = [];
 

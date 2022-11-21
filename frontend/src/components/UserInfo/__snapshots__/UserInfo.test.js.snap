@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserInfo component it should render the page consistently 1`] = `
+<div
+  className="singleFlexProp"
+>
+  <div
+    className="profileInfo__image"
+  >
+    <img
+      alt="danielle"
+      loading="lazy"
+      src="https://res.cloudinary.com/dovw0n8pd/image/upload/v1668788110/knittingApp/users/kmyeziqldhrczp0vzi75.jpg"
+    />
+  </div>
+  <div
+    className="profileInfo__user"
+  >
+    <div
+      className="userInfo__container"
+    >
+      <h2
+        className="userInfo__username"
+      >
+        danielle
+      </h2>
+      <a
+        className="editButtonInfo"
+        data-testid="edit-profile-link"
+        href="/update-profile"
+        onClick={[Function]}
+      >
+        Edit profile
+      </a>
+    </div>
+    <div
+      className="statsInfo"
+    >
+      <p
+        className="statistics"
+      >
+        <span
+          className="individualStats"
+        >
+          5
+        </span>
+         posts
+      </p>
+      <p
+        className="statistics"
+      >
+        <span
+          className="individualStats"
+        >
+          5
+           
+        </span>
+         favs
+      </p>
+    </div>
+    <p
+      className="user__fullName"
+    >
+      danielle
+    </p>
+  </div>
+</div>
+`;

@@ -21,7 +21,7 @@ export const UserInfo = ({ user, postNumber, numberOfFavs }) => {
       <div className="profileInfo__user">
         <div className="userInfo__container">
           <h2 className="userInfo__username">{userData && userData.username ? userData.username : user.nickname}</h2>
-          <Link to="/update-profile" className="editButtonInfo">
+          <Link to="/update-profile" className="editButtonInfo" data-testid="edit-profile-link">
             Edit profile
           </Link>
         </div>
