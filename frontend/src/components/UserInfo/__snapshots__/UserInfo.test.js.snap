@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserInfo component it should change pages on button click 1`] = `
+exports[`UserInfo component it should render the page consistently 1`] = `
 <div
   className="singleFlexProp"
 >

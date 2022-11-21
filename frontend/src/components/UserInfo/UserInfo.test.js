@@ -24,7 +24,7 @@ describe('UserInfo component', () => {
     expect(screen.getByText('posts')).toBeInTheDocument();
   })
 
-  test('it should change pages on button click', async () => {
+  test('it should render the page consistently', async () => {
     const userData = contextUserMock;
     const user = userMock;
     const postNumber = 5;

@@ -8,6 +8,16 @@ export const userMock = {
   updated_at:"2022-11-18T00:12:36.781Z",
 }
 
+export const userMockVerified = {
+  email:"d@test.com",
+  email_verified:true,
+  name:"d@test.com",
+  nickname:"d",
+  picture:"https://s.gravatar.com/avatar/0fb1d94c049e854fd15b9cd629bac718?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fd.png",
+  sub:"auth0|6376cdf467ad3e09030c8e0d",
+  updated_at:"2022-11-18T00:12:36.781Z",
+}
+
 export const contextUserMock = {
   auction_wins:0,
   bio:"",

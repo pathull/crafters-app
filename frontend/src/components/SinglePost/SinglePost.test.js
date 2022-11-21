@@ -60,7 +60,6 @@ describe('Single post component', () => {
   test('class should change on button click', async () => {
     const userData = {id: 1};
     const post = singleMock;
-    const addToWishList = jest.fn(); //how do i connect this jest function to the onClick inside this component?
     //Mock API calls
     //GetSingleWish
     nock(`${env.urlBase}`)
@@ -84,8 +83,11 @@ describe('Single post component', () => {
       </UserContext.Provider>, {wrapper: BrowserRouter}
     )
 
-    await userEvent.click(screen.getByRole('button'));
-    expect(addToWishList).toBeCalledTimes(1);
+    userEvent.click(screen.getByRole('button'));
+    await waitFor(() => {
+      expect(true).toBe(false);
+      //update test after refactor
+    })
 
   })
 

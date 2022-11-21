@@ -22,6 +22,7 @@ export const Sidebar = () => {
         className={`bg-white text-dark-blue text-3xl rounded-full absolute -right-3 top-10 border-2 border-dark-blue cursor-pointer ${
           !toggleButton ? 'rotate-180' : ''
         }`}
+        data-testid="toggle-button"
       />
       <div className="flex items-center p-2 hover:bg-gray-600/90 hover:duration-500 rounded">
         <Link to="/home" className="inline-flex">
