@@ -20,10 +20,14 @@ export const DetailsPost = () => {
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState(null);
-
+  console.log(id);
   useEffect(() => {
     if (userData) {
-      getSinglePostData(id).then(info => setPost(info));
+      getSinglePostData(id).then(info => {
+        setPost(info);
+        console.log(info);
+      });
+
       getCommentsByPost(id).then(data => setComments(data));
     } else {
       navigate('/profile');

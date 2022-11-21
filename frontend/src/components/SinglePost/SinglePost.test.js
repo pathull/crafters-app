@@ -1,4 +1,3 @@
-
 import { SinglePost } from "./SinglePost";
 import { singleMock, mockInfoNotOnWishlist, mockInfoOnWishlist } from '../../mocks/SinglePostMock';
 import userEvent from '@testing-library/user-event'
@@ -38,7 +37,7 @@ import { UserContext } from "../../context/UserContext";
 
 describe('Single post component', () => {
   it('should not be added to the wishlist on star is not active', async () => {
-    const userData = {id: 1};
+    const userData = { id: 1 };
     const post = singleMock;
     //Mock API call
     nock(`${env.urlBase}`)
@@ -50,10 +49,10 @@ describe('Single post component', () => {
 
     render(
       <UserContext.Provider value={{ userData }}>
-        <SinglePost post={post}/>
-      </UserContext.Provider>, {wrapper: BrowserRouter}
+        <SinglePost post={post} />
+      </UserContext.Provider>, { wrapper: BrowserRouter }
     )
-    await waitFor(()=> {
+    await waitFor(() => {
       //userEvent.click(screen.getByRole('button'));
       const wishButton = screen.getByTestId('wish-button');
       expect(wishButton).toHaveClass('wishListStar ');

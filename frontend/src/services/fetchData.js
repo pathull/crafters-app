@@ -93,6 +93,8 @@ export const updateUserInfo = async (id, info) => {
 };
 
 export const getSinglePostData = async id => {
+
+  console.log({ id })
   try {
     if (!id) return;
 
@@ -100,6 +102,8 @@ export const getSinglePostData = async id => {
       method: 'GET',
       mode: 'cors',
     });
+
+    console.log({ singlePost, id })
 
     if (singlePost.status === 200) return singlePost.data;
     else return null;

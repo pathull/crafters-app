@@ -12,9 +12,9 @@ describe('PostList component', () => {
     const context = jest.fn();
 
     const { getByAltText } = await render(
-    <UserContext.Provider value={{ context }}>
-      <PostLists postsList={mockPosts}/>
-    </UserContext.Provider> , {wrapper: BrowserRouter}
+      <UserContext.Provider value={{ context }}>
+        <PostLists postsList={mockPosts} />
+      </UserContext.Provider>, { wrapper: BrowserRouter }
     )
     const image = getByAltText('a palm tree');
     expect(image).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('PostList component', () => {
   test('should render text from empty wish list page', () => {
     const emptyMockPosts = [];
     render(
-      <PostLists postsList={emptyMockPosts}/>, {wrapper: BrowserRouter}
+      <PostLists postsList={emptyMockPosts} />, { wrapper: BrowserRouter }
     )
     expect(screen.getByText('No posts inserted yet')).toBeInTheDocument();
   })
@@ -38,8 +38,8 @@ describe('PostList component', () => {
     const emptyMockPosts = [];
 
     render(
-      <MemoryRouter initialEntries={[{ pathname: '/profile'}]}>
-      <PostLists postsList={emptyMockPosts}/>
+      <MemoryRouter initialEntries={[{ pathname: '/profile' }]}>
+        <PostLists postsList={emptyMockPosts} />
       </MemoryRouter>
     )
     expect(screen.getByText('Create Post')).toBeInTheDocument();
