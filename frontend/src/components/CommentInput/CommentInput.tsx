@@ -5,11 +5,17 @@ import './CommentInput.css';
 
 import { createNewComment, getCommentsByPost } from '../../services/fetchComments';
 
-export const CommentInput = ({ idUser, idPost, setComments }) => {
-  const [comment, setComment] = useState('');
-  const [height, setHeight] = useState(40);
+type Props = {
+  idUser: string;
+  idPost: string;
+  setComments: Function;
+};
 
-  const keyUpHandler = e => {
+export const CommentInput = ({ idUser, idPost, setComments }: Props) => {
+  const [comment, setComment] = useState<string>('');
+  const [height, setHeight] = useState<number>(40);
+
+  const keyUpHandler = (e: any) => {
     let scHeight = e.target.scrollHeight;
     if (height < 64) {
       if (scHeight < 64) setHeight(scHeight);
@@ -19,7 +25,7 @@ export const CommentInput = ({ idUser, idPost, setComments }) => {
     if (comment === '') setHeight(40);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const newComment = { comment: comment.trim(), idUser, idPost };
@@ -44,11 +50,11 @@ export const CommentInput = ({ idUser, idPost, setComments }) => {
           onChange={e => setComment(e.target.value)}
           onKeyUp={keyUpHandler}
           className="w-full focus:ring-0 addComment__input"
-          type="text"
+          // type="text"
           placeholder="Add a comment..."
           required
         ></textarea>
-        <button className="addComment__btn" name="comment-btn" disabled={comment | (comment === '')}>
+        <button className="addComment__btn" name="comment-btn" disabled={Boolean(comment) || comment === ''}>
           <FaTelegramPlane />
         </button>
       </form>
