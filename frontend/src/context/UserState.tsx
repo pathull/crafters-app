@@ -2,23 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { UserContext } from './UserContext';
+import { user } from '../types/User'
+import { defaultUser } from './UserContext'
 import { retrieveUser, storeUser } from '../services/fetchData';
 
-type user = {
-  email: string,
-  bio: string,
-  username: string,
-  name: string,
-  userPicUrl: string,
-}
-const defaultUser = {
-  email: '',
-  bio: '',
-  username: '',
-  name: '',
-  userPicUrl: '',
-
-}
 
 export function UserState({ children }): JSX.Element {
   const { isAuthenticated, user } = useAuth0();

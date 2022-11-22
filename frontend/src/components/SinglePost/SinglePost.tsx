@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillStarFill } from 'react-icons/bs';
 import { motion } from 'framer-motion';
@@ -8,13 +8,21 @@ import './SinglePost.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { UserContext } from '../../context/UserContext';
+import { postData } from '../../types/Post';
+import { postDetails } from '../../types/Post';
 import { env } from '../../helpers/env';
 import { getSingleWish, addPostToWishList, deleteWish, getListWishListByUser } from '../../services/fetchWishList';
 
-export const SinglePost = ({ post, setPostList }) => {
+type SinglePostProps = {
+  post: postDetails
+  setPostList: (arg: postDetails[]) => void;
+}
+
+export const SinglePost: FC<SinglePostProps> = ({ post, setPostList }) => {
   const location = useLocation();
   const { userData } = useContext(UserContext);
-  const [star, setStar] = useState({ wishlist: false });
+  const [star, setStar] = useState<postData>({ wishlist: false });
+  console.log(userData);
 
   useEffect(() => {
     if (post && userData) {

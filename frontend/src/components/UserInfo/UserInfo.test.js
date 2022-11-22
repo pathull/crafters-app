@@ -6,7 +6,6 @@ import { UserContext } from '../../context/UserContext';
 import { userMock, contextUserMock } from '../../mocks/UserMock';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import userEvent from '@testing-library/user-event';
 
 describe('UserInfo component', () => {
   test('it should render the component with an Edit profile Button', () => {

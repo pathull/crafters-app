@@ -25,7 +25,6 @@ export const DetailsPost = () => {
     if (userData) {
       getSinglePostData(id).then(info => {
         setPost(info);
-        console.log(info);
       });
 
       getCommentsByPost(id).then(data => setComments(data));

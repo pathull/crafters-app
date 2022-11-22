@@ -1,22 +1,17 @@
 import { createContext } from 'react';
+import { user } from '../types/User'
 
-type userContext = {
-  email: string,
-  bio: string,
-  username: string,
-  name: string,
-  userPicUrl: string,
-
+export const defaultUser = {
+  auction_wins:0,
+  bio:'',
+  createdAt:'',
+  email:'',
+  id:0,
+  name:'',
+  public_picture_id:'',
+  updatedAt:'',
+  userPicUrl:'',
+  username:'',
 }
 
-const defaultUser = {
-  email: '',
-  bio: '',
-  username: '',
-  name: '',
-  userPicUrl: '',
-
-}
-
-
-export const UserContext = createContext<{userData: userContext, setUserData:any }>({userData: defaultUser, setUserData: ()=>{}});
+export const UserContext = createContext<{userData: user, setUserData:(arg: user)=>void }>({userData: defaultUser, setUserData: ()=>{}});
