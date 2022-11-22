@@ -1,12 +1,27 @@
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './UserInfo.css';
 
 import { UserContext } from '../../context/UserContext';
 
-export const UserInfo = ({ user, postNumber, numberOfFavs }) => {
+type UserInfoProps = {
+  user: {
+    email?: string,
+    email_verified?: boolean,
+    name: string,
+    nickname: string,
+    picture: string,
+    sub?: string,
+    updated_at?: string,
+  };
+  postNumber: number;
+  numberOfFavs: number;
+}
+
+export const UserInfo: FC<UserInfoProps> = ({ user, postNumber, numberOfFavs }) => {
   const { userData } = useContext(UserContext);
+  console.log(userContext);
 
   return (
     <div className="singleFlexProp">
