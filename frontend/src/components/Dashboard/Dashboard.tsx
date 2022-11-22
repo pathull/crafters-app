@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 
 import { getAllPosts } from '../../services/fetchData';
 import { PostLists } from '../PostLists/PostLists';
+import { postDetails } from '../../types/Post';
 
 export const Dashboard = () => {
-  const [allPosts, setAllPosts] = useState<number[] | string[] | bigint[] | boolean[]>([]);
+  const [allPosts, setAllPosts] = useState<postDetails[]>([]);
 
   useEffect(() => {
-    getAllPosts().then((data: number[] | string[] | bigint[] | boolean[]) => setAllPosts(data));
+    getAllPosts().then((data: postDetails[]) => setAllPosts(data));
   }, []);
 
   return (
