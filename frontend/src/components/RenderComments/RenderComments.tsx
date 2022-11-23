@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 import { MdOutlineClear } from 'react-icons/md';
 import moment from 'moment';
 
@@ -6,8 +6,17 @@ import './RenderComments.css';
 
 import { UserContext } from '../../context/UserContext';
 import { deleteComment, getCommentsByPost } from '../../services/fetchComments';
+import { user } from '../../types/User';
+import { comment, postDetails } from '../../types/Post';
 
-export const RenderComments = ({ user, comment, setComments, post }) => {
+type RenderCommentsProps = {
+  user: user,
+  comment: comment,
+  setComments?: (arg: comment[]) => void,
+  post: postDetails
+}
+
+export const RenderComments: FC<RenderCommentsProps> = ({ user, comment, setComments = (arg: comment[]) => {}, post}) => {
   const { userData } = useContext(UserContext);
 
   if (comment) {

@@ -14,4 +14,6 @@ export const defaultUser = {
   username:'',
 }
 
-export const UserContext = createContext<{userData: user, setUserData:(arg: user)=>void }>({userData: defaultUser, setUserData: ()=>{}});
+export const UserContext =
+createContext<{userData: user, setUserData:(arg: user)=>void }>
+({userData: defaultUser, setUserData: ()=>{}});

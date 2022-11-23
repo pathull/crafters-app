@@ -9,9 +9,9 @@ type UserInfoProps = {
   user: {
     email?: string,
     email_verified?: boolean,
-    name: string,
-    nickname: string,
-    picture: string,
+    name?: string,
+    nickname?: string,
+    picture?: string,
     sub?: string,
     updated_at?: string,
   };

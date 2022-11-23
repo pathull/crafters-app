@@ -13,14 +13,15 @@ import { UserContext } from '../../context/UserContext';
 import { RenderComments } from '../RenderComments/RenderComments';
 import { CommentInput } from '../CommentInput/CommentInput';
 import { InteractionPanel } from '../InteractionPanel/InteractionPanel';
+import { postDetails, defaultPost, comment } from '../../types/Post';
 
 export const DetailsPost = () => {
   const { id } = useParams();
   const { userData } = useContext(UserContext);
   const navigate = useNavigate();
-  const [comments, setComments] = useState([]);
-  const [post, setPost] = useState(null);
-  console.log(id);
+  const [comments, setComments] = useState<comment[]>([]);
+  const [post, setPost] = useState<postDetails>(defaultPost);
+
   useEffect(() => {
     if (userData) {
       getSinglePostData(id).then(info => {

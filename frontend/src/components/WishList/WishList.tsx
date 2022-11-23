@@ -1,11 +1,12 @@
-import { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, FC } from 'react';
 
 import { UserContext } from '../../context/UserContext';
 import { PostLists } from '../PostLists/PostLists';
 import { getListWishListByUser } from '../../services/fetchWishList';
+import { postDetails } from '../../types/Post';
 
 export const WishList = () => {
-  const [postList, setPostList] = useState([]);
+  const [postList, setPostList] = useState<postDetails[]>([]);
   const { userData } = useContext(UserContext);
 
   useEffect(() => {

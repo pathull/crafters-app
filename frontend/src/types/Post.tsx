@@ -1,3 +1,5 @@
+import { user } from './User';
+
 export type postData = {
   createdAt?: string,
   id?: number,
@@ -10,12 +12,55 @@ export type postData = {
 export type postDetails = {
   createdAt: string,
   description: string,
-  id: 0,
+  id: number,
   postPicUrl: string,
   price: string,
   public_image_id: string,
   sold: boolean,
   title: string,
   updatedAt: string,
-  userEmail: string
+  userEmail: string,
+
+  postPicture?: Blob,
+  user: user
+  idPost:number,
+  comment:string,
+}
+
+export type newPost = {
+  postPicture: any;
+  title: string;
+  description: string;
+  price: number;
+  userEmail: string | undefined;
+}
+
+export const defaultPost = {
+  createdAt: '',
+  description: '',
+  id: 0,
+  postPicUrl: '',
+  price: '',
+  public_image_id: '',
+  sold: false,
+  title: '',
+  updatedAt: '',
+  userEmail: '',
+  username: '',
+  user: {
+    id: 0,
+
+  },
+  idPost:0,
+  comment:'',
+}
+
+//confirm this data shape
+export type comment = {
+  description: string,
+  comment: string,
+  updatedAt: string,
+  id: number,
+  idPost: number,
+  user: user
 }

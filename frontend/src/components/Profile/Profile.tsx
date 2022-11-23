@@ -12,17 +12,18 @@ import { createNewOrder } from '../../services/fetchOrders';
 import { PostLists } from '../PostLists/PostLists';
 import { UserInfo } from '../UserInfo/UserInfo';
 import { UserContext } from '../../context/UserContext';
+import { postDetails } from '../../types/Post';
 
 export const Profile = () => {
   const { userData } = useContext(UserContext);
   const { user } = useAuth0();
   const [searchParams] = useSearchParams();
-  const [posts, setPosts] = useState([]);
-  const [numberOfFavs, setNumberOfFavs] = useState(0);
+  const [posts, setPosts] = useState<postDetails[]>([]);
+  const [numberOfFavs, setNumberOfFavs] = useState<number>(0);
 
   useEffect(() => {
     if (user) {
-      retrievePosts(user.email).then(data => setPosts(data));
+      retrievePosts(user.email as string).then(data => setPosts(data));
       if (userData) {
         getNumberOfFavs(userData.id).then(result => setNumberOfFavs(result.number));
       }
@@ -31,8 +32,8 @@ export const Profile = () => {
 
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
-      const idPost = searchParams.get('itemId');
-      const userId = searchParams.get('userId');
+      const idPost = searchParams.get('itemId') as string;
+      const userId = searchParams.get('userId') as string;
 
       getSinglePostData(idPost).then(postData => {
         if (!postData.sold) {

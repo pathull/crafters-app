@@ -7,7 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 
 export const Sidebar = () => {
-  const [toggleButton, setToggleButton] = useState(true);
+  const [toggleButton, setToggleButton] = useState<boolean>(true);
   const { logout } = useAuth0();
 
   const handleLogoutUser = () => {

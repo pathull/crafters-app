@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 import { env } from '../helpers/env';
+import { postData, postDetails } from '../types/Post';
+import { user } from '../types/User';
 
-export const retrievePosts = async email => {
+export const retrievePosts = async (email:string) => {
   try {
     if (!email) return;
 
@@ -18,7 +20,13 @@ export const retrievePosts = async email => {
   }
 };
 
-export const createNewPost = async post => {
+export const createNewPost = async (post: {
+  postPicture: any;
+  title: string;
+  description: string;
+  price: number;
+  userEmail: string | undefined;
+}) => {
   try {
     if (post) {
       const fd = new FormData();
@@ -39,7 +47,7 @@ export const createNewPost = async post => {
   }
 };
 
-export const retrieveUser = async userEmail => {
+export const retrieveUser = async (userEmail: string | undefined) => {
   try {
     if (!userEmail) return;
     const data = await fetch(`${env.urlBase}/user/${userEmail}`, {
@@ -54,7 +62,7 @@ export const retrieveUser = async userEmail => {
   }
 };
 
-export const storeUser = async body => {
+export const storeUser = async (body:user) => {
   try {
     const data = await fetch(`${env.urlBase}/user`, {
       method: 'POST',
@@ -72,7 +80,7 @@ export const storeUser = async body => {
   }
 };
 
-export const updateUserInfo = async (id, info) => {
+export const updateUserInfo = async (id: number, info: { [x: string]: string | Blob; }) => {
   try {
     if (!id) return;
 
@@ -92,12 +100,13 @@ export const updateUserInfo = async (id, info) => {
   }
 };
 
-export const getSinglePostData = async id => {
+export const getSinglePostData = async (id: string | undefined) => {
   try {
     if (!id) return;
 
     const singlePost = await axios.get(`${env.urlBase}/posts/single-post/${id}`, {
       method: 'GET',
+      //@ts-ignore
       mode: 'cors',
     });
 
@@ -123,7 +132,7 @@ export const getAllPosts = async () => {
   }
 };
 
-export const deleteSinglePost = async idPost => {
+export const deleteSinglePost = async (idPost: number) => {
   try {
     if (!isNaN(Number(idPost))) {
       const data = await fetch(`${env.urlBase}/posts/delete-post/${idPost}`, {
@@ -138,7 +147,7 @@ export const deleteSinglePost = async idPost => {
   }
 };
 
-export const updateStateOfPost = async idPost => {
+export const updateStateOfPost = async (idPost:string) => {
   try {
     if (!isNaN(Number(idPost))) {
       const data = await fetch(`${env.urlBase}/posts/update-post/${idPost}`, {

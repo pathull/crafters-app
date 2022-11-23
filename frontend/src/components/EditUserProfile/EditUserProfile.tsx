@@ -43,7 +43,7 @@ export const EditUserProfile = () => {
     }
   }, [navigate, userData]);
 
-  const handleChange = e => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };

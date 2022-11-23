@@ -14,7 +14,7 @@ function App() {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div className={isAuthenticated ? 'flex' : null}>
+    <div className={isAuthenticated ? 'flex' : ''}>
       {isAuthenticated ? <Sidebar /> : null}
 
       <Routes>

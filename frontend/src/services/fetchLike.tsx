@@ -1,6 +1,6 @@
 import { env } from '../helpers/env';
 
-export const getSingleLike = async (idUser, idPost) => {
+export const getSingleLike = async (idUser: string, idPost: string) => {
   try {
     const data = await fetch(`${env.urlBase}/likes/user/${idUser}/post/${idPost}`, {
       method: 'GET',
@@ -13,7 +13,7 @@ export const getSingleLike = async (idUser, idPost) => {
   }
 };
 
-export const addLikeToPost = async body => {
+export const addLikeToPost = async (body: { idPost: string; idUser: string; }) => {
   try {
     const data = await fetch(`${env.urlBase}/likes`, {
       method: 'POST',
@@ -31,7 +31,7 @@ export const addLikeToPost = async body => {
   }
 };
 
-export const deleteLike = async id => {
+export const deleteLike = async (id: number) => {
   try {
     const res = await fetch(`${env.urlBase}/likes/delete/${id}`, {
       method: 'DELETE',

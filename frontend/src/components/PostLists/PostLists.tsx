@@ -1,10 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
+import React, { FC } from 'react';
 
 import './PostLists.css';
 
 import { SinglePost } from '../SinglePost/SinglePost';
+import { postDetails } from '../../types/Post';
 
-export const PostLists = ({ postsList, setPostList }) => {
+type PostListsProps = {
+  postsList: postDetails[],
+  setPostList?: (arg: postDetails[] ) => void
+}
+
+export const PostLists: FC<PostListsProps> = ({ postsList, setPostList = (arg: postDetails[] ) => {}}) => {
   const location = useLocation();
 
   return (

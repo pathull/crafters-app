@@ -6,8 +6,8 @@ import './CommentInput.css';
 import { createNewComment, getCommentsByPost } from '../../services/fetchComments';
 
 type Props = {
-  idUser: string;
-  idPost: string;
+  idUser: number;
+  idPost: number;
   setComments: Function;
 };
 

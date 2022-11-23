@@ -22,12 +22,11 @@ export const SinglePost: FC<SinglePostProps> = ({ post, setPostList }) => {
   const location = useLocation();
   const { userData } = useContext(UserContext);
   const [star, setStar] = useState<postData>({ wishlist: false });
-  console.log(userData);
 
   useEffect(() => {
     if (post && userData) {
-      getSingleWish(userData.id, post.id).then(info => {
-        if (!info.error) {
+      getSingleWish(userData.id, post.id).then((info:postData) => {
+        if (info) {
           setStar(info);
         }
       });
@@ -37,8 +36,7 @@ export const SinglePost: FC<SinglePostProps> = ({ post, setPostList }) => {
   const addToWishList = async () => {
     const added = await addPostToWishList({ idUser: userData.id, idPost: post.id });
 
-    if (!added.error) {
-      console.log(added);
+    if (added) {
       setStar(added);
     }
   };

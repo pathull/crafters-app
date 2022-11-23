@@ -15,6 +15,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
 import { createNewPost } from '../../services/fetchData';
+import { newPost } from '../../types/Post';
 
 const initialPostState = {
   title: '',
@@ -24,23 +25,23 @@ const initialPostState = {
 
 export const NewPost = () => {
   const navigate = useNavigate();
-  const { user } = useAuth0();
+  const { user = {email:''} } = useAuth0();
   const [state, setState] = useState(initialPostState);
-  const [image, setImage] = useState([]);
-  const [toggleBtn, setToggleBtn] = useState(false);
+  const [image, setImage] = useState<any[]>([]);
+  const [toggleBtn, setToggleBtn] = useState<boolean>(false);
 
-  const handleInputNumberChange = e => {
+  const handleInputNumberChange = (e:any) => {
     if (e.target.value >= 0) {
       if (/^\d*\.?\d{0,2}$/.test(e.target.value)) setState({ ...state, price: e.target.value });
     }
   };
 
-  const handleChange = e => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
 
-  const submitHandler = async e => {
+  const submitHandler = async (e:any) => {
     e.preventDefault();
     setToggleBtn(true);
 
@@ -53,7 +54,7 @@ export const NewPost = () => {
 
       const res = await createNewPost(post);
       setState(initialPostState);
-      setImage(null);
+      setImage([]);
 
       if (res.id) {
         navigate('/profile');

@@ -41,6 +41,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@types/auth0": "^2.35.7",
+    "@types/file-exists": "^5.0.0",
     "@types/react-lazy-load-image-component": "^1.5.2",
     "nock": "^13.2.9"
   }
