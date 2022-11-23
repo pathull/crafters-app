@@ -17,7 +17,7 @@ type UserInfoProps = {
   };
   postNumber: number;
   numberOfFavs: number;
-}
+};
 
 export const UserInfo: FC<UserInfoProps> = ({ user, postNumber, numberOfFavs }) => {
   const { userData } = useContext(UserContext);

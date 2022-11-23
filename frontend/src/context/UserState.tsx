@@ -2,8 +2,8 @@ import React, { useState, useEffect, FC, PropsWithChildren, ReactNode } from 're
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { UserContext } from './UserContext';
-import { user } from '../types/User'
-import { defaultUser } from './UserContext'
+import { user } from '../types/User';
+import { defaultUser } from './UserContext';
 import { retrieveUser, storeUser } from '../services/fetchData';
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
 export const UserState: FC<Props> = ({ children }) => {
   const { isAuthenticated, user } = useAuth0();
   const [userData, setUserData] = useState<user>(defaultUser);
-
 
   useEffect(() => {
     if (isAuthenticated && user) {

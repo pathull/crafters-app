@@ -7,18 +7,17 @@ describe('Sidebar component', () => {
 
   test('should include logout button when logged in', () => {
     render(
-      <Sidebar/>, {wrapper: BrowserRouter}
+      <Sidebar />, { wrapper: BrowserRouter }
     )
-    const  logoutButton = screen.getByText('Logout');
+    const logoutButton = screen.getByText('Logout');
     expect(logoutButton).toBeInTheDocument();
-
   })
 
 
   test('it should hide titles on toggle click', async () => {
 
     const { getByTestId } = render(
-      <Sidebar/>, {wrapper: BrowserRouter}
+      <Sidebar />, { wrapper: BrowserRouter }
     )
     const toggleButton = getByTestId('toggle-button');
     const profileButton = screen.getByText('Profile');

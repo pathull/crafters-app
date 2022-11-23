@@ -12,11 +12,12 @@ import { postData } from '../../types/Post';
 import { postDetails } from '../../types/Post';
 import { env } from '../../helpers/env';
 import { getSingleWish, addPostToWishList, deleteWish, getListWishListByUser } from '../../services/fetchWishList';
+import { isNumberObject } from 'util/types';
 
 type SinglePostProps = {
-  post: postDetails
+  post: postDetails;
   setPostList: (arg: postDetails[]) => void;
-}
+};
 
 export const SinglePost: FC<SinglePostProps> = ({ post, setPostList }) => {
   const location = useLocation();

@@ -62,7 +62,7 @@ export const Profile = () => {
           <UserInfo user={user} postNumber={posts.length} numberOfFavs={numberOfFavs} />
 
           <div className="listContainer__posts">
-            <PostLists postsList={posts} />
+            <PostLists postsList={posts} setPostList={undefined} />
           </div>
         </div>
       ) : (

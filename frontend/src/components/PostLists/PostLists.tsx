@@ -17,7 +17,7 @@ export const PostLists: FC<PostListsProps> = ({ postsList, setPostList = (arg: p
   return (
     <div className="postLists__container">
       {postsList.length ? (
-        postsList.map(post => <SinglePost post={post} key={post.id} setPostList={setPostList} />)
+        postsList.map((post: postDetails) => <SinglePost post={post} key={post.id} setPostList={setPostList} />)
       ) : location.pathname === '/profile' ? (
         <div className="button__container">
           <Link className="button__createPost" to="/create/post">

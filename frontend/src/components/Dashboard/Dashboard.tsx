@@ -15,7 +15,7 @@ export const Dashboard = () => {
     <section className="profileSection">
       <div className="profileContainer">
         <div className="listContainer__posts">
-          <PostLists postsList={allPosts} />
+          <PostLists postsList={allPosts} setPostList={undefined} />
         </div>
       </div>
     </section>
