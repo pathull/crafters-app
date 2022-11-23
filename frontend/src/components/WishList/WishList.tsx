@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState, FC } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 
 import { UserContext } from '../../context/UserContext';
 import { PostLists } from '../PostLists/PostLists';

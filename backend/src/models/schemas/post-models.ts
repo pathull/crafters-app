@@ -15,15 +15,6 @@ export const PostSchema = sequelize.define<Model<IPost, Optional<IPost, 'id'>>>(
     autoIncrement: true,
     allowNull: false,
   },
-  // userEmail: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   validate: {
-  //     isEmail: {
-  //       msg: 'User must be an Email',
-  //     },
-  //   },
-  // },
   title: {
     type: DataTypes.STRING,
     allowNull: false,

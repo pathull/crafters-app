@@ -1,5 +1,4 @@
 import { env } from '../helpers/env';
-import { comment } from '../types/Post';
 
 export const createNewComment = async (newComment:{idPost: number, idUser: number, comment:string}) => {
   try {

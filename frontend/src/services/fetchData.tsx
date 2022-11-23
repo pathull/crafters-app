@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 import { env } from '../helpers/env';
-import { postData, postDetails } from '../types/Post';
-import { User, user } from '../types/User';
+import { postDetails } from '../types/Post';
+import { user } from '../types/User';
 
 export const retrievePosts = async (email:string) => {
   try {

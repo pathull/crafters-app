@@ -12,7 +12,6 @@ import { postData } from '../../types/Post';
 import { postDetails } from '../../types/Post';
 import { env } from '../../helpers/env';
 import { getSingleWish, addPostToWishList, deleteWish, getListWishListByUser } from '../../services/fetchWishList';
-import { isNumberObject } from 'util/types';
 
 type SinglePostProps = {
   post: postDetails;

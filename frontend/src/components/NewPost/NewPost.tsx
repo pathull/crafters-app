@@ -15,7 +15,6 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
 import { createNewPost } from '../../services/fetchData';
-import { newPost } from '../../types/Post';
 
 const initialPostState = {
   title: '',
