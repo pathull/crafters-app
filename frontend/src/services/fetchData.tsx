@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { env } from '../helpers/env';
 import { postData, postDetails } from '../types/Post';
-import { user } from '../types/User';
+import { User, user } from '../types/User';
 
 export const retrievePosts = async (email:string) => {
   try {
@@ -20,13 +20,7 @@ export const retrievePosts = async (email:string) => {
   }
 };
 
-export const createNewPost = async (post: {
-  postPicture: any;
-  title: string;
-  description: string;
-  price: number;
-  userEmail: string | undefined;
-}) => {
+export const createNewPost = async (post: postDetails | any ) => {
   try {
     if (post) {
       const fd = new FormData();
@@ -80,7 +74,7 @@ export const storeUser = async (body:user) => {
   }
 };
 
-export const updateUserInfo = async (id: number, info: { [x: string]: string | Blob; }) => {
+export const updateUserInfo = async (id: number, info: any) => {
   try {
     if (!id) return;
 

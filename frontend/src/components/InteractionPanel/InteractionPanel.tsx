@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, FC } from 'react';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
@@ -7,11 +7,16 @@ import './InteractionPanel.css';
 import { UserContext } from '../../context/UserContext';
 import { paymentApi } from '../../services/fetchPayment';
 import { getSingleLike, addLikeToPost, deleteLike } from '../../services/fetchLike';
+import { postDetails, likeStatus } from '../../types/Post';
 
-export const InteractionPanel = ({ post }) => {
+type InteractionPanelProps = {
+  post: postDetails
+}
+
+export const InteractionPanel: FC<InteractionPanelProps> = ({ post }) => {
   const { userData } = useContext(UserContext);
-  const [likeStatus, setLikeStatus] = useState({ like: false });
-  const [togglePurchaseBtn, setTogglePurchaseBtn] = useState(false);
+  const [likeStatus, setLikeStatus] = useState<likeStatus>({ like: false, id: 0 });
+  const [togglePurchaseBtn, setTogglePurchaseBtn] = useState<boolean>(false);
 
   useEffect(() => {
     getSingleLike(userData.id, post.id).then(res => {

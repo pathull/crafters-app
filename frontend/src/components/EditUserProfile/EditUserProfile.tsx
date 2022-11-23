@@ -14,6 +14,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 import { UserContext } from '../../context/UserContext';
 import { updateUserInfo } from '../../services/fetchData';
+import { User } from '../../types/User';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
@@ -21,15 +22,16 @@ const initialUserState = {
   name: '',
   username: '',
   bio: '',
+  is: 0
 };
 
 export const EditUserProfile = () => {
   const navigate = useNavigate();
   const { userData, setUserData } = useContext(UserContext);
 
-  const [state, setState] = useState(initialUserState);
-  const [picture, setPicture] = useState([]);
-  const [toggleBtn, setToggleBtn] = useState(false);
+  const [state, setState] = useState<User>(initialUserState);
+  const [picture, setPicture] = useState<any[]>([]);
+  const [toggleBtn, setToggleBtn] = useState<boolean>(false);
 
   useEffect(() => {
     if (!userData) {
@@ -48,7 +50,7 @@ export const EditUserProfile = () => {
     setState({ ...state, [name]: value });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     setToggleBtn(true);
 

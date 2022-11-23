@@ -25,8 +25,7 @@
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
     "indent": ["error", 2],
-    "keyword-spacing": "error",
-    "linebreak-style": ["error", "windows"]
+    "keyword-spacing": "error"
   },
   "settings": {
     "react": {
