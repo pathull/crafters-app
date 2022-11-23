@@ -1,6 +1,6 @@
 import { env } from '../helpers/env';
 
-export const getSingleWish = async (idUser, idPost) => {
+export const getSingleWish = async (/** @type {number} */ idUser: number, /** @type {number} */ idPost: number) => {
   try {
     const data = await fetch(`${env.urlBase}/wishlist/user/${idUser}/post/${idPost}`, {
       method: 'GET',
@@ -13,7 +13,9 @@ export const getSingleWish = async (idUser, idPost) => {
   }
 };
 
-export const addPostToWishList = async body => {
+export const addPostToWishList = async (
+  /** @type {{ idUser: number; idPost: 0; }} */ body: { idUser: number; idPost: number }
+) => {
   try {
     const data = await fetch(`${env.urlBase}/wishlist`, {
       method: 'POST',
@@ -31,7 +33,7 @@ export const addPostToWishList = async body => {
   }
 };
 
-export const deleteWish = async id => {
+export const deleteWish = async (/** @type {number | undefined} */ id: number | undefined) => {
   try {
     const res = await fetch(`${env.urlBase}/wishlist/delete/${id}`, {
       method: 'DELETE',
@@ -44,7 +46,7 @@ export const deleteWish = async id => {
   }
 };
 
-export const getListWishListByUser = async idUser => {
+export const getListWishListByUser = async (/** @type {number} */ idUser: number) => {
   try {
     const data = await fetch(`${env.urlBase}/wishlist/${idUser}`, {
       method: 'GET',
@@ -57,7 +59,7 @@ export const getListWishListByUser = async idUser => {
   }
 };
 
-export const getNumberOfFavs = async idUser => {
+export const getNumberOfFavs = async (/** @type {number} */ idUser: number) => {
   try {
     const data = await fetch(`${env.urlBase}/wishlist/number-favs/${idUser}`, {
       method: 'GET',

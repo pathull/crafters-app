@@ -8,10 +8,10 @@ import { UserContext } from '../../context/UserContext';
 import { paymentApi } from '../../services/fetchPayment';
 import { getSingleLike, addLikeToPost, deleteLike } from '../../services/fetchLike';
 
-export const InteractionPanel = ({ post }) => {
+export const InteractionPanel = ({ post }: any) => {
   const { userData } = useContext(UserContext);
-  const [likeStatus, setLikeStatus] = useState({ like: false });
-  const [togglePurchaseBtn, setTogglePurchaseBtn] = useState(false);
+  const [likeStatus, setLikeStatus] = useState<any>({ like: false });
+  const [togglePurchaseBtn, setTogglePurchaseBtn] = useState<any>(false);
 
   useEffect(() => {
     getSingleLike(userData.id, post.id).then(res => {

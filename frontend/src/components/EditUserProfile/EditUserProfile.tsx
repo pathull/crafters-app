@@ -27,8 +27,8 @@ export const EditUserProfile = () => {
   const navigate = useNavigate();
   const { userData, setUserData } = useContext(UserContext);
 
-  const [state, setState] = useState(initialUserState);
-  const [picture, setPicture] = useState([]);
+  const [state, setState] = useState<any>(initialUserState);
+  const [picture, setPicture] = useState<any>([]);
   const [toggleBtn, setToggleBtn] = useState(false);
 
   useEffect(() => {
@@ -43,12 +43,12 @@ export const EditUserProfile = () => {
     }
   }, [navigate, userData]);
 
-  const handleChange = e => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setToggleBtn(true);
 

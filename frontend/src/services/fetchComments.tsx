@@ -1,6 +1,12 @@
 import { env } from '../helpers/env';
 
-export const createNewComment = async newComment => {
+export const createNewComment = async (
+  /** @type {{ comment: string; idUser: string; idPost: string; }} */ newComment: {
+    comment: string;
+    idUser: string;
+    idPost: string;
+  }
+) => {
   try {
     if (newComment) {
       const data = await fetch(`${env.urlBase}/comments`, {
@@ -21,7 +27,7 @@ export const createNewComment = async newComment => {
   }
 };
 
-export const getCommentsByPost = async id => {
+export const getCommentsByPost = async (/** @type {string | undefined} */ id: string | undefined) => {
   try {
     if (!isNaN(Number(id))) {
       const allComments = await fetch(`${env.urlBase}/comments/${id}`, {
@@ -36,7 +42,7 @@ export const getCommentsByPost = async id => {
   }
 };
 
-export const deleteComment = async idComment => {
+export const deleteComment = async (/** @type {any} */ idComment: any) => {
   try {
     if (!isNaN(Number(idComment))) {
       const data = await fetch(`${env.urlBase}/comments/delete/${idComment}`, {

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { env } from '../helpers/env';
 
-export const retrievePosts = async email => {
+export const retrievePosts = async (/** @type {string | undefined} */ email: string | undefined) => {
   try {
     if (!email) return;
 
@@ -18,7 +18,14 @@ export const retrievePosts = async email => {
   }
 };
 
-export const createNewPost = async post => {
+export const createNewPost = async (post: {
+  [x: string]: string | Blob;
+  postPicture?: any;
+  title: string;
+  description: string;
+  price: string;
+  userEmail: string | Blob;
+}) => {
   try {
     if (post) {
       const fd = new FormData();
@@ -39,7 +46,7 @@ export const createNewPost = async post => {
   }
 };
 
-export const retrieveUser = async userEmail => {
+export const retrieveUser = async (/** @type {string | undefined} */ userEmail: string | undefined) => {
   try {
     if (!userEmail) return;
     const data = await fetch(`${env.urlBase}/user/${userEmail}`, {
@@ -54,7 +61,15 @@ export const retrieveUser = async userEmail => {
   }
 };
 
-export const storeUser = async body => {
+export const storeUser = async (
+  /** @type {{ email: string | undefined; bio: string; username: string | undefined; name: string; userPicUrl: string | undefined; }} */ body: {
+    email: string | undefined;
+    bio: string;
+    username: string | undefined;
+    name: string;
+    userPicUrl: string | undefined;
+  }
+) => {
   try {
     const data = await fetch(`${env.urlBase}/user`, {
       method: 'POST',
@@ -72,7 +87,15 @@ export const storeUser = async body => {
   }
 };
 
-export const updateUserInfo = async (id, info) => {
+export const updateUserInfo = async (
+  /** @type {number} */ id: number,
+  /** @type {{ [x: string]: string | Blob; name?: string; username?: string; bio?: string; }} */ info: {
+    [x: string]: string | Blob;
+    name: string;
+    username: string;
+    bio: string;
+  }
+) => {
   try {
     if (!id) return;
 
@@ -92,12 +115,13 @@ export const updateUserInfo = async (id, info) => {
   }
 };
 
-export const getSinglePostData = async id => {
+export const getSinglePostData = async (/** @type {string | null | undefined} */ id: string | null | undefined) => {
   try {
     if (!id) return;
 
     const singlePost = await axios.get(`${env.urlBase}/posts/single-post/${id}`, {
       method: 'GET',
+      // @ts-ignore
       mode: 'cors',
     });
 
@@ -123,7 +147,7 @@ export const getAllPosts = async () => {
   }
 };
 
-export const deleteSinglePost = async idPost => {
+export const deleteSinglePost = async (/** @type {any} */ idPost: any) => {
   try {
     if (!isNaN(Number(idPost))) {
       const data = await fetch(`${env.urlBase}/posts/delete-post/${idPost}`, {
@@ -138,7 +162,7 @@ export const deleteSinglePost = async idPost => {
   }
 };
 
-export const updateStateOfPost = async idPost => {
+export const updateStateOfPost = async (/** @type {string | null} */ idPost: string | null) => {
   try {
     if (!isNaN(Number(idPost))) {
       const data = await fetch(`${env.urlBase}/posts/update-post/${idPost}`, {

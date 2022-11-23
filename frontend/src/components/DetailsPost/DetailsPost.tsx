@@ -16,10 +16,10 @@ import { InteractionPanel } from '../InteractionPanel/InteractionPanel';
 
 export const DetailsPost = () => {
   const { id } = useParams();
-  const { userData } = useContext(UserContext);
+  const { userData } = useContext<any>(UserContext);
   const navigate = useNavigate();
-  const [comments, setComments] = useState([]);
-  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState<any>([]);
+  const [post, setPost] = useState<any>(null);
   console.log(id);
   useEffect(() => {
     if (userData) {
@@ -84,8 +84,10 @@ export const DetailsPost = () => {
               <div className="listComments__container">
                 {post.description || comments.length !== 0 ? (
                   <>
-                    {post.description ? <RenderComments user={post.user} post={post} comment={post} /> : null}
-                    {comments.map(comment => (
+                    {post.description ? (
+                      <RenderComments user={post.user} post={post} comment={post} setComments={undefined} />
+                    ) : null}
+                    {comments.map((comment: any) => (
                       <RenderComments
                         key={comment.id}
                         user={comment.user}

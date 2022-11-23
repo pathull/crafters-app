@@ -7,7 +7,14 @@ import './RenderComments.css';
 import { UserContext } from '../../context/UserContext';
 import { deleteComment, getCommentsByPost } from '../../services/fetchComments';
 
-export const RenderComments = ({ user, comment, setComments, post }) => {
+type Props = {
+  user: any;
+  comment: any;
+  setComments: any;
+  post: any;
+};
+
+export const RenderComments = ({ user, comment, setComments, post }: Props) => {
   const { userData } = useContext(UserContext);
 
   if (comment) {

@@ -24,23 +24,23 @@ const initialPostState = {
 
 export const NewPost = () => {
   const navigate = useNavigate();
-  const { user } = useAuth0();
-  const [state, setState] = useState(initialPostState);
-  const [image, setImage] = useState([]);
-  const [toggleBtn, setToggleBtn] = useState(false);
+  const { user } = useAuth0<any>();
+  const [state, setState] = useState<any>(initialPostState);
+  const [image, setImage] = useState<any>([]);
+  const [toggleBtn, setToggleBtn] = useState<any>(false);
 
-  const handleInputNumberChange = e => {
+  const handleInputNumberChange = (e: any) => {
     if (e.target.value >= 0) {
       if (/^\d*\.?\d{0,2}$/.test(e.target.value)) setState({ ...state, price: e.target.value });
     }
   };
 
-  const handleChange = e => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
 
-  const submitHandler = async e => {
+  const submitHandler = async (e: any) => {
     e.preventDefault();
     setToggleBtn(true);
 

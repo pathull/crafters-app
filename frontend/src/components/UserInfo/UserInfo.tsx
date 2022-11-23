@@ -7,17 +7,17 @@ import { UserContext } from '../../context/UserContext';
 
 type UserInfoProps = {
   user: {
-    email?: string,
-    email_verified?: boolean,
-    name: string,
-    nickname: string,
-    picture: string,
-    sub?: string,
-    updated_at?: string,
+    email?: string;
+    email_verified?: boolean;
+    name: string;
+    nickname: string;
+    picture: string;
+    sub?: string;
+    updated_at?: string;
   };
   postNumber: number;
   numberOfFavs: number;
-}
+};
 
 export const UserInfo: FC<UserInfoProps> = ({ user, postNumber, numberOfFavs }) => {
   const { userData } = useContext(UserContext);

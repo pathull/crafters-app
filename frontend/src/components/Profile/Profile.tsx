@@ -12,13 +12,14 @@ import { createNewOrder } from '../../services/fetchOrders';
 import { PostLists } from '../PostLists/PostLists';
 import { UserInfo } from '../UserInfo/UserInfo';
 import { UserContext } from '../../context/UserContext';
+import { User } from '../../types/User';
 
 export const Profile = () => {
   const { userData } = useContext(UserContext);
-  const { user } = useAuth0();
+  const { user } = useAuth0<User>();
   const [searchParams] = useSearchParams();
-  const [posts, setPosts] = useState([]);
-  const [numberOfFavs, setNumberOfFavs] = useState(0);
+  const [posts, setPosts] = useState<any>([]);
+  const [numberOfFavs, setNumberOfFavs] = useState<number>(0);
 
   useEffect(() => {
     if (user) {
@@ -61,7 +62,7 @@ export const Profile = () => {
           <UserInfo user={user} postNumber={posts.length} numberOfFavs={numberOfFavs} />
 
           <div className="listContainer__posts">
-            <PostLists postsList={posts} />
+            <PostLists postsList={posts} setPostList={undefined} />
           </div>
         </div>
       ) : (
