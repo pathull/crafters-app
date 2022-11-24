@@ -26,7 +26,9 @@ export const retrieveCommentsByPost = async (req: Request, res: Response, next: 
 export const deleteSingleComment = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await deleteOneComment(req.params.idComment);
-    if (result) res.status(200).json({ message: 'Success' });
+    if (result) res.status(200).json({
+      message: `Success`
+    });
     else res.status(405).json({ message: 'Comment not deleted', error: true });
   } catch (err) {
     console.error(err);
