@@ -1,28 +1,19 @@
 
-const supertest = require('supertest');
-const app = require('../dist/server/server.js');
+const request = require('supertest');
+const app = require('../dist/testApp');
+const server = 'http://localhost:8081';
 
-const server = supertest.agent(app);
 
-function loginUser() {
-  return function(done) {
-    server
-    .post('/')
-    .send({ user: 'd@test.com', password: 'TESTtest123!' })
-    .end(function(err, res) {
-      if (err) return done(err);
-      return done();
-    })
-  }
-}
+describe(' POST / createNewComment', () => {
 
-describe('test', () => {
+  test('should return status 200', async () => {
+    console.log(app);
+    const res = await request(server).get('/listPosts/');
 
-  // test('login', loginUser())
-  // test('GET ./ should return status 200', async () => {
-  //   const res = await server.get('./');
-  //   expect(res.status).toEqual(200);
-  // });
+    expect(res.statusCode).toBe(200);
+
+  });
+
   test('bad test', () => {
     expect(true).toBe(true);
   })
