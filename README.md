@@ -103,3 +103,5 @@ npm test
 
 ## Author
 * Gustavo Silva Navarro - [GitHub](https://github.com/GustavoSilvaNavarro) - [Linkedin](https://www.linkedin.com/in/gustavo-silva-navarro/)
+* Patrick Hull - [GitHub](https://github.com/pathull) - [Linkedin](https://www.linkedin.com/in/patrick-hull-869a07a4)
+* Danielle Stroscher - [GitHub](https://github.com/daniellestroscher) - [Linkedin](https://www.linkedin.com/in/danielle-stroscher/)
